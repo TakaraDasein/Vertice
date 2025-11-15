@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae - Oscar Abel Bermeo Sotelo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #C75C36;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            color: #C75C36;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #C75C36;
+        }
+
+        .subsection {
+            margin-bottom: 20px;
+        }
+
+        .subsection-title {
+            color: #1C3D32;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .subsection-subtitle {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #333;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .skills-list, .experience-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .skills-list li, .experience-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #333;
+        }
+
+        .skills-list li:before, .experience-list li:before {
+            content: "▪";
+            color: #C75C36;
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            color: white;
+            font-size: 0.95em;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header h2 {
+                font-size: 1.1em;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Oscar Abel Bermeo Sotelo</h1>
+            <h2>Politólogo - Magíster en Sostenibilidad</h2>
+            <div class="contact-info">
+                <div class="contact-item">📧 contacto@vertice.com</div>
+                <div class="contact-item">📱 +57 300 123 4567</div>
+                <div class="contact-item">📍 Colombia</div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Perfil Profesional -->
+            <section class="section">
+                <h3 class="section-title">Perfil Profesional</h3>
+                <p class="description">
+                    Especialista en Gerencia Social, con estudios en alta gerencial y Magíster en sostenibilidad con más de 15 años de experiencia liderando proyectos con impacto social, institucional, ambiental y territorial. Ha trabajado en diferentes agencias de Naciones Unidas y en organizaciones internacionales como: PNUD, OCHA, HelpAge International, Consejo Noruego para Refugiados, Opción Legal, entre otras. Hoy lidera VÉRTICE como un espacio de co-creación para nuevas formas de transformación desde lo local.
+                </p>
+            </section>
+
+            <!-- Formación Académica -->
+            <section class="section">
+                <h3 class="section-title">Formación Académica</h3>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Magíster en Sostenibilidad</div>
+                    <div class="subsection-subtitle">Universidad [Nombre Universidad] • 2018-2020</div>
+                    <p class="description">
+                        Especialización en desarrollo sostenible, triple impacto y empresas B. Enfoque en sostenibilidad empresarial y comunitaria.
+                    </p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Especialización en Gerencia Social</div>
+                    <div class="subsection-subtitle">Universidad [Nombre Universidad] • 2015-2016</div>
+                    <p class="description">
+                        Formación especializada en gestión de proyectos sociales, indicadores de impacto y evaluación de programas de desarrollo.
+                    </p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Estudios en Alta Gerencia</div>
+                    <div class="subsection-subtitle">Institución [Nombre] • 2014</div>
+                    <p class="description">
+                        Formación ejecutiva en liderazgo estratégico, gestión organizacional y toma de decisiones.
+                    </p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Politólogo</div>
+                    <div class="subsection-subtitle">Universidad [Nombre Universidad] • 2005-2010</div>
+                    <p class="description">
+                        Pregrado en Ciencia Política con énfasis en políticas públicas, desarrollo territorial y gobernanza.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Experiencia Profesional -->
+            <section class="section">
+                <h3 class="section-title">Experiencia Profesional</h3>
+                
+                <div class="subsection">
+                    <div class="subsection-title">Fundador y CEO - VÉRTICE | Laboratorio de Soluciones</div>
+                    <div class="subsection-subtitle">2020 - Presente</div>
+                    <ul class="experience-list">
+                        <li>Liderazgo de consultora especializada en sostenibilidad y triple impacto</li>
+                        <li>Co-creación de estrategias y soluciones sostenibles con empresas y comunidades</li>
+                        <li>Diseño e implementación de modelos de negocio con impacto social y ambiental</li>
+                        <li>Articulación de actores para proyectos de transformación territorial</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Programa de las Naciones Unidas para el Desarrollo (PNUD)</div>
+                    <div class="subsection-subtitle">2016 - 2020</div>
+                    <ul class="experience-list">
+                        <li>Gestión de proyectos de desarrollo sostenible y construcción de paz</li>
+                        <li>Coordinación de programas de fortalecimiento institucional</li>
+                        <li>Evaluación y seguimiento de iniciativas de desarrollo territorial</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Oficina de Coordinación de Asuntos Humanitarios (OCHA)</div>
+                    <div class="subsection-subtitle">2014 - 2016</div>
+                    <ul class="experience-list">
+                        <li>Coordinación de respuesta humanitaria en contextos de emergencia</li>
+                        <li>Articulación interagencial para asistencia a poblaciones vulnerables</li>
+                        <li>Análisis de situación humanitaria y reportes estratégicos</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">HelpAge International</div>
+                    <div class="subsection-subtitle">2012 - 2014</div>
+                    <ul class="experience-list">
+                        <li>Implementación de proyectos de protección social para adultos mayores</li>
+                        <li>Fortalecimiento de redes comunitarias de apoyo</li>
+                        <li>Desarrollo de estrategias de incidencia en políticas públicas</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Consejo Noruego para Refugiados (NRC)</div>
+                    <div class="subsection-subtitle">2010 - 2012</div>
+                    <ul class="experience-list">
+                        <li>Atención a población desplazada y refugiada</li>
+                        <li>Gestión de proyectos de vivienda y asentamientos</li>
+                        <li>Coordinación con autoridades locales para respuesta humanitaria</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Áreas de Experticia -->
+            <section class="section">
+                <h3 class="section-title">Áreas de Experticia</h3>
+                <ul class="skills-list">
+                    <li>Sostenibilidad y Triple Impacto (Social, Ambiental, Económico)</li>
+                    <li>Gerencia Social y Gestión de Proyectos de Desarrollo</li>
+                    <li>Desarrollo Territorial y Ordenamiento</li>
+                    <li>Construcción de Paz y Transformación de Conflictos</li>
+                    <li>Políticas Públicas e Incidencia</li>
+                    <li>Empresas B y Modelos de Negocio Sostenibles</li>
+                    <li>Acción Humanitaria y Gestión de Crisis</li>
+                    <li>Articulación Interinstitucional y Co-creación</li>
+                    <li>Evaluación de Impacto Social y Ambiental</li>
+                    <li>Liderazgo Estratégico y Alta Gerencia</li>
+                </ul>
+            </section>
+
+            <!-- Idiomas -->
+            <section class="section">
+                <h3 class="section-title">Idiomas</h3>
+                <ul class="skills-list">
+                    <li>Español - Nativo</li>
+                    <li>Inglés - Avanzado (C1)</li>
+                    <li>Portugués - Intermedio (B1)</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

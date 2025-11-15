@@ -1,0 +1,767 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   PALETA DE COLORES VÉRTICE - REGLA 60-30-10
+   ============================================================================
+   
+   Basado en estructura.md - Diseño profesional y sostenible
+   
+   🎨 DISTRIBUCIÓN:
+   ---------------
+   60% - Blanco Arena (#F9F8F6) - Color DOMINANTE
+         Usado en: Fondos principales, espacios amplios, cards
+         Crea sensación de amplitud y limpieza
+   
+   30% - Verde Botella (#1C3D32) - Color PRINCIPAL
+         Usado en: Títulos, navegación, estructura visual
+         Establece la identidad de marca
+   
+   10% - Acentos (Terracota #C75C36 + Verde Oliva #476A47)
+         Usado en: Botones CTA, highlights, elementos interactivos
+         Dirige la atención y genera acción
+   
+   📝 TEXTOS:
+   ---------
+   Gris Cálido (#4F4F4F) - Texto principal para óptima legibilidad
+   
+   ============================================================================ */
+
+:root {
+  /* VÉRTICE Brand Palette - Based on estructura.md 
+     Regla 60-30-10:
+     60% - Blanco Arena (fondos, espacios dominantes)
+     30% - Verde Botella (títulos, estructura, elementos principales)
+     10% - Terracota + Verde Oliva (acentos, CTAs)
+  */
+  
+  /* PRIMARY (30%): Verde Botella - Títulos y elementos principales */
+  --primary: #1C3D32; /* Verde Botella - oklch(0.26 0.05 165) */
+  --primary-foreground: #F9F8F6; /* Blanco Arena */
+  
+  /* SECONDARY (10%): Terracota - Acentos visuales */
+  --secondary: #C75C36; /* Terracota Suave - oklch(0.56 0.16 35) */
+  --secondary-foreground: #FFFFFF;
+  
+  /* ACCENT (10%): Verde Oliva - Botones CTA */
+  --accent: #476A47; /* Verde Oliva - oklch(0.42 0.06 145) */
+  --accent-foreground: #FFFFFF;
+  
+  /* BACKGROUND (60%): Blanco Arena - Color dominante */
+  --background: #F9F8F6; /* Blanco Arena - oklch(0.98 0.005 60) */
+  --foreground: #4F4F4F; /* Gris Cálido - Textos principales */
+  
+  /* Cards y elementos de contenido (variación del 60%) */
+  --card: #FFFFFF; /* Blanco puro para contraste sobre arena */
+  --card-foreground: #4F4F4F; /* Gris Cálido */
+  
+  --popover: #FFFFFF;
+  --popover-foreground: #4F4F4F;
+  
+  /* Supporting Colors */
+  --muted: #EDE9E3; /* Beige más oscuro para variación */
+  --muted-foreground: #6B6B6B; /* Gris medio */
+  
+  --destructive: #C75C36; /* Terracota para destructive */
+  --destructive-foreground: #FFFFFF;
+  
+  --border: #D4CFC7; /* Beige suave para bordes */
+  --input: #FFFFFF; /* Input blanco sobre arena */
+  --ring: rgba(71, 106, 71, 0.4); /* Verde Oliva con transparencia */
+  
+  /* Chart Colors - VÉRTICE Brand Palette */
+  --chart-1: #1C3D32; /* Verde Botella */
+  --chart-2: #C75C36; /* Terracota */
+  --chart-3: #476A47; /* Verde Oliva */
+  --chart-4: #D4A574; /* Dorado tierra */
+  --chart-5: #7BA89F; /* Verde agua */
+  
+  --radius: 0.75rem;
+  
+  /* Sidebar colors */
+  --sidebar: #F9F8F6; /* Blanco Arena */
+  --sidebar-foreground: #4F4F4F; /* Gris Cálido */
+  --sidebar-primary: #1C3D32; /* Verde Botella */
+  --sidebar-primary-foreground: #F9F8F6;
+  --sidebar-accent: #476A47; /* Verde Oliva */
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #D4CFC7;
+  --sidebar-ring: rgba(71, 106, 71, 0.4);
+}
+
+.dark {
+  /* Dark Mode - Inversión con la paleta VÉRTICE */
+  --primary: #6B9D87; /* Verde más claro para contraste */
+  --primary-foreground: #FFFFFF;
+  
+  --secondary: #E08A67; /* Terracota más brillante */
+  --secondary-foreground: #FFFFFF;
+  
+  --accent: #7BA89F; /* Verde Oliva claro */
+  --accent-foreground: #FFFFFF;
+  
+  --background: #0F1F1A; /* Verde Botella muy oscuro */
+  --foreground: #E8E4DE; /* Arena claro para texto */
+  
+  --card: #1A2E27; /* Card ligeramente más claro */
+  --card-foreground: #E8E4DE;
+  
+  --popover: #1A2E27;
+  --popover-foreground: #E8E4DE;
+  
+  --muted: #243831;
+  --muted-foreground: #A8A39A;
+  
+  --destructive: #E08A67;
+  --destructive-foreground: #FFFFFF;
+  
+  --border: #2D4039;
+  --input: #1A2E27;
+  --ring: rgba(123, 168, 159, 0.4);
+  
+  --chart-1: #6B9D87;
+  --chart-2: #E08A67;
+  --chart-3: #7BA89F;
+  --chart-4: #D4A574;
+  --chart-5: #8BADB4;
+  
+  --sidebar: #0F1F1A;
+  --sidebar-foreground: #E8E4DE;
+  --sidebar-primary: #6B9D87;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #7BA89F;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #2D4039;
+  --sidebar-ring: rgba(123, 168, 159, 0.4);
+}
+
+@theme inline {
+  /* Typography - Sustainable & Modern Fonts */
+  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ============================================
+   REGLA 60-30-10 - PALETA VÉRTICE
+   ============================================
+   60% - Blanco Arena #F9F8F6 (color dominante - fondos, espacios)
+   30% - Verde Botella #1C3D32 (color principal - títulos, estructura)
+   10% - Terracota #C75C36 + Verde Oliva #476A47 (acentos - CTAs, highlights)
+*/
+
+/* ============================================
+   ZOOM SCROLL NAVIGATION SYSTEM
+   ============================================
+   Basado en animacion.md - CSS Scroll-driven Animations
+   Crea un efecto de zoom + blur al hacer scroll entre secciones
+*/
+
+/* 1. HTML: Configuración de scroll snap y timeline scope */
+html {
+  /* Snapping obligatorio en eje Y para alinear secciones */
+  scroll-snap-type: y mandatory;
+  
+  /* Timeline scope para poder targetear cualquier elemento */
+  timeline-scope: --section, --main, --site-header;
+  
+  /* Scroll suave */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Eliminamos scroll inercial en móviles para mejor control */
+  overscroll-behavior: none;
+}
+
+/* 2. Main: Timeline principal */
+main.zoom-scroll-main {
+  view-timeline: --main;
+}
+
+/* 3. Section: Configuración de snap y timeline individual */
+.zoom-section {
+  /* Snap al inicio de cada sección */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  
+  /* Timeline individual para cada sección */
+  view-timeline: --section;
+  
+  /* Altura completa del viewport dinámico (funciona en móviles) */
+  height: 100dvh;
+  
+  /* Posición relativa para el contenido fijo */
+  position: relative;
+}
+
+/* 4. Content: El contenido que hace zoom */
+.zoom-content {
+  /* Fijamos el contenido para que no scrollee con la sección */
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  
+  /* Variables para controlar el efecto */
+  --zoom-blur: 5rem;
+  --zoom-blur-exit: 3rem;
+  
+  /* Aplicamos la animación basada en el scroll de la sección */
+  animation: zoom-scroll ease-in-out both;
+  animation-timeline: --section;
+  
+  /* Z-index para asegurar que el contenido esté sobre otros elementos */
+  z-index: 1;
+}
+
+/* 5. Animación de Zoom Scroll */
+@keyframes zoom-scroll {
+  /* Estado inicial: aparecer con zoom desde pequeño */
+  0% {
+    filter: blur(var(--zoom-blur));
+    transform: scale(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  /* Estado activo: contenido completamente visible */
+  50% {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Estado de salida: zoom hacia afuera con blur */
+  100% {
+    filter: blur(var(--zoom-blur-exit));
+    transform: scale(1.5);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* 6. Fallback para navegadores sin soporte */
+@supports not (animation-timeline: scroll()) {
+  .zoom-content {
+    /* Deshabilitamos el fixed y las animaciones */
+    position: relative;
+    animation: none;
+    filter: none;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .zoom-section {
+    /* Scroll normal */
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  html {
+    scroll-snap-type: none;
+  }
+}
+
+/* 7. Optimizaciones de rendimiento */
+.zoom-content {
+  /* GPU acceleration */
+  will-change: transform, filter, opacity;
+  
+  /* Backface visibility para mejor rendering */
+  backface-visibility: hidden;
+  
+  /* Anti-aliasing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 8. Ajustes móviles */
+@media (max-width: 768px) {
+  .zoom-content {
+    /* Reducimos el blur en móviles para mejor performance */
+    --zoom-blur: 3rem;
+    --zoom-blur-exit: 2rem;
+  }
+  
+  html {
+    /* Scroll snap más relajado en móviles */
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* 9. Variantes de velocidad (opcional) */
+.zoom-content.zoom-fast {
+  animation-timing-function: ease-in;
+}
+
+.zoom-content.zoom-slow {
+  animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* 10. Estados especiales */
+.zoom-content[data-active="true"] {
+  /* Contenido actualmente visible */
+  z-index: 10;
+}
+
+/* ============================================
+   FIN ZOOM SCROLL NAVIGATION SYSTEM
+   ============================================ */
+
+/* Utilidades para aplicar la regla 60-30-10 */
+.bg-dominant-60 {
+  background-color: var(--background); /* Blanco Arena */
+}
+
+.text-principal-30 {
+  color: var(--primary); /* Verde Botella */
+}
+
+.bg-principal-30 {
+  background-color: var(--primary); /* Verde Botella */
+}
+
+.text-accent-10 {
+  color: var(--accent); /* Verde Oliva */
+}
+
+.bg-accent-10 {
+  background-color: var(--accent); /* Verde Oliva */
+}
+
+.text-accent-secondary-10 {
+  color: var(--secondary); /* Terracota */
+}
+
+.bg-accent-secondary-10 {
+  background-color: var(--secondary); /* Terracota */
+}
+
+/* ============================================
+   ZOOM SCROLL NAVIGATION SYSTEM
+   ============================================
+   Based on CSS Scroll-driven Animations
+   Each section zooms in/out smoothly during scroll
+*/
+
+html {
+  /* Enable snap scrolling on Y axis */
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  
+  /* Create timeline scope for scroll animations */
+  timeline-scope: --section, --main;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  background-color: var(--background);
+}
+
+/* Main wrapper for zoom scroll effect */
+.zoom-scroll-wrapper {
+  view-timeline: --main;
+}
+
+/* Each section is a snap point */
+.zoom-scroll-section {
+  /* Snap alignment */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  
+  /* Full viewport height */
+  height: 100dvh;
+  min-height: 100vh;
+  
+  /* Create view timeline for this section */
+  view-timeline: --section;
+  
+  /* Positioning */
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Content inside section - this is what animates */
+.zoom-scroll-content {
+  /* Fixed positioning creates the "stay in place" effect */
+  position: fixed;
+  inset: 0;
+  
+  /* Ensure proper stacking */
+  overflow: hidden;
+  
+  /* Zoom animation */
+  animation: zoom-scroll ease-in-out both;
+  animation-timeline: --section;
+}
+
+/* Zoom scroll animation keyframes */
+@keyframes zoom-scroll {
+  0% {
+    filter: blur(4rem);
+    transform: scale(0.3);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  25% {
+    filter: blur(1rem);
+    transform: scale(0.7);
+    opacity: 0.5;
+    visibility: visible;
+  }
+
+  50% {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  75% {
+    filter: blur(1rem);
+    transform: scale(1.15);
+    opacity: 0.5;
+    visibility: visible;
+  }
+
+  100% {
+    filter: blur(4rem);
+    transform: scale(1.5);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Fallback for browsers without scroll-driven animations */
+@supports not (animation-timeline: scroll()) {
+  .zoom-scroll-content {
+    position: relative;
+    animation: none;
+  }
+  
+  html {
+    scroll-snap-type: none;
+  }
+}
+
+/* Legacy panel styles for non-zoom sections */
+.panel {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Normal scroll container */
+.scroll-container {
+  scroll-behavior: smooth;
+}
+
+/* Mobile responsive */
+@media (max-width: 1023px) {
+  .panel {
+    min-height: 100vh;
+  }
+}
+
+/* Animation classes */
+.animate-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-in:nth-child(1) { animation-delay: 0.1s; }
+.animate-in:nth-child(2) { animation-delay: 0.2s; }
+.animate-in:nth-child(3) { animation-delay: 0.3s; }
+.animate-in:nth-child(4) { animation-delay: 0.4s; }
+.animate-in:nth-child(5) { animation-delay: 0.5s; }
+.animate-in:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating animation */
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(10px) rotate(1deg);
+  }
+  50% { 
+    transform: translateY(-20px) translateX(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-10px) translateX(8px) rotate(0.5deg);
+  }
+}
+
+/* Tech Logo Sequential Animation */
+.tech-logo-animated {
+  animation: techFloat 6s ease-in-out infinite;
+}
+
+@keyframes techFloat {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(0.95);
+    filter: drop-shadow(0 0 30px rgba(80, 128, 51, 0.3)) 
+            drop-shadow(0 0 50px rgba(80, 128, 51, 0.2));
+    opacity: 0.10;
+  }
+  16.6% {
+    transform: translateY(-8px) translateX(5px) scale(0.97);
+    filter: drop-shadow(0 0 40px rgba(80, 128, 51, 0.4)) 
+            drop-shadow(0 0 70px rgba(80, 128, 51, 0.3));
+    opacity: 0.11;
+  }
+  33.3% {
+    transform: translateY(-15px) translateX(-3px) scale(1);
+    filter: drop-shadow(0 0 50px rgba(80, 128, 51, 0.5)) 
+            drop-shadow(0 0 90px rgba(80, 128, 51, 0.4));
+    opacity: 0.12;
+  }
+  50% {
+    transform: translateY(-20px) translateX(8px) scale(1.03);
+    filter: drop-shadow(0 0 60px rgba(80, 128, 51, 0.6)) 
+            drop-shadow(0 0 110px rgba(80, 128, 51, 0.5));
+    opacity: 0.14;
+  }
+  66.6% {
+    transform: translateY(-15px) translateX(-5px) scale(1);
+    filter: drop-shadow(0 0 50px rgba(80, 128, 51, 0.5)) 
+            drop-shadow(0 0 90px rgba(80, 128, 51, 0.4));
+    opacity: 0.12;
+  }
+  83.3% {
+    transform: translateY(-8px) translateX(5px) scale(0.97);
+    filter: drop-shadow(0 0 40px rgba(80, 128, 51, 0.4)) 
+            drop-shadow(0 0 70px rgba(80, 128, 51, 0.3));
+    opacity: 0.11;
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) scale(0.95);
+    filter: drop-shadow(0 0 30px rgba(80, 128, 51, 0.3)) 
+            drop-shadow(0 0 50px rgba(80, 128, 51, 0.2));
+    opacity: 0.10;
+  }
+}
+
+/* Global Typography System */
+body {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 { 
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+}
+
+h2 { 
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+}
+
+h3 { 
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 600;
+}
+
+h4 { 
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-weight: 600;
+}
+
+/* Semantic Text Classes */
+.text-display {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.text-body {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.text-sustainable {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.text-accent-glow {
+  color: var(--accent);
+  text-shadow: 0 0 20px oklch(0.72 0.18 145 / 0.3);
+}
+
+/* VÉRTICE Brand Design Elements - Usando paleta 60-30-10 */
+.eco-gradient {
+  background: linear-gradient(
+    135deg, 
+    #1C3D32 0%, /* Verde Botella (30%) */
+    #476A47 100% /* Verde Oliva (10%) */
+  );
+}
+
+.earth-gradient {
+  background: linear-gradient(
+    135deg, 
+    #C75C36 0%, /* Terracota (10%) */
+    #D4A574 100% /* Dorado tierra */
+  );
+}
+
+.nature-gradient {
+  background: linear-gradient(
+    135deg,
+    #476A47 0%, /* Verde Oliva */
+    #7BA89F 100% /* Verde agua */
+  );
+}
+
+.glass-morphism {
+  background: rgba(249, 248, 246, 0.75); /* Blanco Arena (60%) con transparencia */
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 207, 199, 0.4);
+}
+
+.dark .glass-morphism {
+  background: rgba(26, 46, 39, 0.75);
+  border: 1px solid rgba(45, 64, 57, 0.5);
+}
+
+/* Staggered Menu Styles */
+.sm-panel-list[data-numbering] {
+  counter-reset: smItem;
+}
+
+.sm-panel-list[data-numbering] .sm-panel-item::after {
+  counter-increment: smItem;
+  content: counter(smItem, decimal-leading-zero);
+  position: absolute;
+  top: 0.2em;
+  right: 0.3em;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--sm-num-opacity, 0);
+  transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .sm-panel-list[data-numbering] .sm-panel-item::after {
+    font-size: 12px;
+    right: 0.2em;
+    top: 0.3em;
+  }
+  
+  .sm-panel-item {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sm-panel-item {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+  }
+}
+
+/* Smooth transitions for menu items */
+.sm-panel-item {
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1.3 !important;
+}
+
+/* Orbital Animation for Triple Impact Section */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
