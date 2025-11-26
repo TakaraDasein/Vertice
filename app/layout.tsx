@@ -7,7 +7,7 @@ import WhatsAppButton from "@/components/whatsapp-button"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "VÉRTICE - Laboratorio de Soluciones Sostenibles",
+  title: "Vértice",
   description:
     "Plataforma de innovación orientada al desarrollo de proyectos con enfoque de triple impacto: social, ambiental y económico.",
   generator: "v0.app",

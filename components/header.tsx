@@ -5,10 +5,34 @@ import { gsap } from "gsap"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { MapPin } from "lucide-react"
+import { usePathname, useRouter } from "next/navigation"
 
 export default function Header() {
+  // Estado y referencia para el panel lateral (asegura cerrado por defecto)
   const [open, setOpen] = useState(false)
   const openRef = useRef(false)
+
+  // Refuerza el estado cerrado en el primer render (por si alguna animación o efecto lo abre)
+  useEffect(() => {
+    setOpen(false);
+    openRef.current = false;
+  }, []);
+  // Asegura visualmente que el panel esté oculto cuando `open` es false
+  useEffect(() => {
+    const panel = panelRef.current
+    if (!panel) return
+    if (!open) {
+      panel.style.display = 'none'
+      panel.style.opacity = '0'
+      panel.style.pointerEvents = 'none'
+      panel.style.visibility = 'hidden'
+    } else {
+      panel.style.display = ''
+      panel.style.opacity = ''
+      panel.style.pointerEvents = ''
+      panel.style.visibility = ''
+    }
+  }, [open])
   const panelRef = useRef<HTMLDivElement>(null)
   const preLayersRef = useRef<HTMLDivElement>(null)
   const preLayerElsRef = useRef<HTMLDivElement[]>([])
@@ -28,14 +52,17 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState<string>('section-0')
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const navRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
+  const router = useRouter()
 
   const menuItems = [
     { label: 'Inicio', sectionId: 'section-0' },
-    { label: 'Vértice', sectionId: 'section-1' },
-    { label: 'Triple Impacto', sectionId: 'section-2' },
-    { label: 'Servicios', sectionId: 'section-3' },
-    { label: 'Nuestro modelo', sectionId: 'section-4' },
-    { label: 'Contacto', sectionId: 'section-5' }
+    { label: '¿Qué es Vértice?', sectionId: 'section-1' },
+    { label: 'Nosotros', sectionId: 'section-2' },
+    { label: 'Triple Impacto', sectionId: 'section-3' },
+    { label: 'Servicios', sectionId: 'section-4' },
+    { label: 'Nuestro modelo', sectionId: 'section-5' },
+    { label: 'Contacto', sectionId: 'section-6' }
   ]
 
   // Track visible section to mark active menu item
@@ -59,14 +86,45 @@ export default function Header() {
       if (el) observer.observe(el)
     })
 
-    return () => observer.disconnect()
+    // If user scrolls to (or near) the bottom of the page, ensure "Contacto" is highlighted.
+    const onScroll = () => {
+      try {
+        const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120
+        if (nearBottom) {
+          setActiveSection('section-6')
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', onScroll)
+    }
   }, [])
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
+    const element = typeof document !== 'undefined' ? document.getElementById(sectionId) : null
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      // If the target section is not on the current page, navigate to the home page with hash
+      // so the browser will land on the correct section. After navigation, attempt a small
+      // delayed scroll to ensure smooth behavior.
+      try {
+        router.push(`/#${sectionId}`)
+        setTimeout(() => {
+          const el = document.getElementById(sectionId)
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 250)
+      } catch (e) {
+        // fallback: do nothing
+      }
     }
+
     // Close menu immediately on mobile when clicking a menu item
     if (openRef.current) {
       try {
@@ -314,35 +372,111 @@ export default function Header() {
     animateText(target)
   }, [playOpen, playClose, animateIcon, animateText])
 
+  const isContact = activeSection === 'section-6'
+  const headerRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const setHeaderHeight = () => {
+      try {
+        const el = headerRef.current
+        if (el) {
+          const h = el.offsetHeight
+          document.documentElement.style.setProperty('--header-height', `${h}px`)
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    setHeaderHeight()
+
+    let ro: ResizeObserver | null = null
+    try {
+      if (headerRef.current && 'ResizeObserver' in window) {
+        ro = new ResizeObserver(() => setHeaderHeight())
+        ro.observe(headerRef.current)
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    window.addEventListener('resize', setHeaderHeight)
+    // also update on font load or other layout changes
+    window.addEventListener('load', setHeaderHeight)
+
+    return () => {
+      window.removeEventListener('resize', setHeaderHeight)
+      window.removeEventListener('load', setHeaderHeight)
+      if (ro && headerRef.current) ro.unobserve(headerRef.current)
+    }
+  }, [])
+
+  const isTerritorio = pathname === '/vertice-territorio' || pathname === '/vertice-territorio/'
+
   return (
     <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-50">
-      {/* Pre-layers for staggered effect */}
+      {/* --- Pre-layers para animación lateral del panel --- */}
       <div ref={preLayersRef} className="absolute top-0 right-0 bottom-0 w-full md:w-[clamp(260px,38vw,420px)] pointer-events-none z-[45]">
         <div className="sm-prelayer absolute top-0 right-0 h-full w-full" style={{ background: '#1C3D32' }} />
         <div className="sm-prelayer absolute top-0 right-0 h-full w-full" style={{ background: '#476A47' }} />
       </div>
 
-      {/* Header Bar (glass / frost) */}
+      {/* --- Barra superior: logo, menú horizontal (desktop), botón toggle panel --- */}
       <header
-        className="absolute top-0 left-0 w-full flex items-center justify-between px-6 py-3 md:px-8 md:py-4 pointer-events-auto z-50 border-b border-transparent"
+        ref={headerRef}
+        className={
+          `absolute top-0 left-0 w-full flex items-center justify-between px-6 py-3 md:px-8 md:py-4 pointer-events-auto z-50 backdrop-blur-2xl ` +
+          (isContact ? 'border-b border-white/5' : 'border-b border-transparent')
+        }
+        style={isTerritorio ? {
+          backgroundColor: '#1C3D32',
+          boxShadow: '0 6px 30px rgba(0,0,0,0.22)'
+        } : {
+          backgroundColor: 'rgba(71,106,71,0.32)',
+          boxShadow: '0 6px 30px rgba(0,0,0,0.18)',
+          WebkitBackdropFilter: 'blur(18px) saturate(1.06)',
+          backdropFilter: 'blur(18px) saturate(1.06)'
+        }}
       >
-        {/* Logo */}
-        <a
-          href="/"
-          className="flex items-center cursor-pointer group relative z-[51]"
-        >
-          <Image 
-            src="/vertice.svg" 
-            alt="VÉRTICE Logo" 
-            width={40} 
-            height={40}
-            className="transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(94,136,122,0.8)] drop-shadow-[0_0_15px_rgba(94,136,122,0.6)]"
+        {/* Glass sheen overlay to make glass effect perceptible even if backdrop-filter isn't supported */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01))', mixBlendMode: 'normal' }} />
+        {/* Background/texture for Contact section */}
+        {isContact && (
+          <div
+            className="absolute inset-0 pointer-events-none -z-10"
+            style={{
+              backgroundColor: '#1C3D32',
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundRepeat: 'repeat',
+              opacity: 1,
+            }}
           />
+        )}
+        {/* Logo (inline SVG so we can force white stroke and keep terracota dot) */}
+        <a href="/" className="flex items-center cursor-pointer group relative z-[51]" aria-label="VÉRTICE home">
+          <svg width="40" height="40" viewBox="0 0 320 440" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-all duration-300 group-hover:scale-110">
+            <path d="M251.421 161.597C227.924 109.508 201.976 88.4231 160 49C86.369 111.882 53.0836 183.794 50.1981 233.68C47.3127 283.566 76.1681 333.822 122.215 361.535C125.897 297.697 251.421 161.597 251.421 161.597ZM251.421 161.597C297.535 271.189 254.247 334.135 160.871 391" stroke="#FFFFFF" strokeWidth="20" strokeLinecap="round" />
+            <circle cx="189" cy="316" r="25" fill="#C75C36" />
+            <circle cx="189" cy="316" r="24.5" stroke="#762A0F" strokeOpacity="0.91" />
+          </svg>
         </a>
 
-        {/* Right side: Desktop menu + Mobile toggle button */}
+        {/* Header texture overlay (more visible, glassy) */}
+        <div
+          className="absolute inset-0 -z-10 pointer-events-none"
+          style={{
+            opacity: 0.12,
+            mixBlendMode: 'overlay',
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\"120\" height=\"120\" viewBox=\"0 0 120 120\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cdefs%3E%3Cpattern id=\"p\" width=\"12\" height=\"12\" patternUnits=\"userSpaceOnUse\" patternTransform=\"rotate(22.5)\"%3E%3Crect width=\"12\" height=\"12\" fill=\"%23476A47\"/%3E%3Cpath d=\"M0 0 L0 12\" stroke=\"%23ffffff\" stroke-opacity=\"0.03\" stroke-width=\"1\"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width=\"100%\" height=\"100%\" fill=\"url(%23p)%22/%3E%3C/svg%3E")',
+            backgroundRepeat: 'repeat',
+            backgroundSize: '120px 120px',
+          }}
+        />
+
+        {/* Menú horizontal (solo visible en desktop md+) y botón toggle panel (siempre visible) */}
         <div className="flex items-center gap-6 pointer-events-auto z-[51]">
-          {/* Desktop inline menu (visible md+) */}
+          {/* Menú horizontal (desktop) */}
           <nav 
             ref={navRef}
             className="hidden md:flex items-center gap-6 pointer-events-auto"
@@ -354,29 +488,19 @@ export default function Header() {
                 <li key={item.label + idx}>
                   <button
                     className={
-                      "group relative overflow-visible text-foreground font-medium text-xs md:text-sm transition-transform duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded"
+                      "group relative overflow-visible text-white font-medium text-sm md:text-base transition-transform duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded"
                     }
                     onClick={() => scrollToSection(item.sectionId)}
                     type="button"
                     aria-label={item.label}
                   >
                   <span
-                    className={
-                      `inline-block transition-transform duration-200 ease-out group-active:scale-95 relative ${
-                        activeSection === item.sectionId ? 'text-[#5E887A]' : 'group-hover:text-[#5E887A]'
-                      }`
-                    }
-                    style={{ 
-                      transformOrigin: 'center',
-                      backgroundImage: `radial-gradient(circle 40px at ${cursorPos.x}px ${cursorPos.y}px, rgba(255, 255, 255, 0.15), transparent 70%)`,
-                      backgroundSize: '200% 200%',
-                      backgroundPosition: `${cursorPos.x}px ${cursorPos.y}px`,
-                      backgroundRepeat: 'no-repeat'
-                    }}
+                    className={`inline-block transition-transform duration-200 ease-out group-active:scale-95 relative text-white text-sm md:text-base`}
+                    style={{ transformOrigin: 'center' }}
                   >
                     {item.label}
                   </span>
-                  {/* subtle underline animated with radial glow effect */}
+                  {/* Subrayado animado con glow radial */}
                   <span
                     aria-hidden
                       className={
@@ -384,9 +508,6 @@ export default function Header() {
                           activeSection === item.sectionId ? 'scale-x-100' : 'group-hover:scale-x-100'
                         }`
                       }
-                      style={{
-                        filter: `drop-shadow(${cursorPos.x - 50}px 0px 8px rgba(206, 92, 54, 0.5))`
-                      }}
                   />
                 </button>
               </li>
@@ -394,7 +515,7 @@ export default function Header() {
           </ul>
           </nav>
 
-          {/* Menu Toggle Button - visible on all sizes */}
+          {/* Botón toggle panel lateral (menú desplegable, visible siempre) */}
           <button
             ref={toggleBtnRef}
             className="relative inline-flex items-center justify-center bg-transparent border-none cursor-pointer pointer-events-auto hover:scale-110 transition-all z-[51]"
@@ -416,25 +537,27 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Menu Panel */}
+      {/* --- Panel lateral desplegable (menú animado, visible en desktop y móvil) --- */}
       <aside
         ref={panelRef}
         className="absolute top-0 right-0 w-full md:w-[clamp(260px,38vw,420px)] h-full backdrop-blur-xl flex flex-col pt-28 md:pt-32 pb-8 px-6 md:px-10 overflow-y-auto z-[46] pointer-events-auto"
         style={{ background: 'rgba(249, 248, 246, 0.95)' }}
         aria-hidden={!open}
       >
+        {/* --- Contenido del panel lateral --- */}
         <div className="flex-1 flex flex-col justify-center gap-3">
+          {/* Lista de secciones navegables */}
           <ul className="list-none m-0 p-0 flex flex-col gap-2 sm-panel-list" data-numbering>
             {menuItems.map((item, idx) => (
               <li className="relative overflow-hidden leading-tight" key={item.label + idx}>
                 <button
-                  className="relative text-foreground font-bold text-2xl sm:text-3xl md:text-3xl lg:text-4xl cursor-pointer leading-tight tracking-[-1px] uppercase transition-colors inline-block pr-[1.4em] sm-panel-item text-left w-full"
+                  className="relative text-[#5E887A] font-bold text-sm sm:text-base md:text-lg cursor-pointer leading-tight tracking-[-1px] uppercase transition-colors inline-block pr-[1.4em] sm-panel-item text-left w-full"
                   onClick={() => scrollToSection(item.sectionId)}
                   data-index={idx + 1}
                 >
                   <span
                     className={`inline-block sm-panel-itemLabel transition-colors duration-200 ease-out active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#476A47]/30 ${
-                      activeSection === item.sectionId ? 'text-[#476A47]' : 'hover:text-[#476A47]'
+                      activeSection === item.sectionId ? 'text-[#476A47] font-bold' : 'hover:text-[#476A47]'
                     }`}
                   >
                     {item.label}
@@ -444,10 +567,10 @@ export default function Header() {
             ))}
           </ul>
 
-          {/* CTA Button - Vértice en Territorio */}
+          {/* Botón CTA: Vértice Territorio */}
           <div className="mt-8 pt-6 border-t border-primary/20">
             <a
-              href="/vertice-en-territorio"
+              href="/vertice-territorio"
               className="block w-full"
             >
               <Button 
@@ -455,12 +578,14 @@ export default function Header() {
                 size="lg"
               >
                 <MapPin className="w-5 h-5 mr-2" />
-                Vértice en Territorio
+                Vértice Territorio
               </Button>
             </a>
           </div>
         </div>
+        {/* --- Fin contenido panel lateral --- */}
       </aside>
+      {/* --- Fin panel lateral --- */}
     </div>
   )
 }

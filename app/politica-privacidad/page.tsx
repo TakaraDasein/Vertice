@@ -65,7 +65,7 @@ export default function PoliticaPrivacidad() {
             <div className="bg-muted/30 p-6 rounded-lg space-y-2">
               <p className="text-foreground"><strong>Razón social:</strong> VÉRTICE - Laboratorio de Soluciones</p>
               <p className="text-foreground"><strong>Domicilio:</strong> Medellín, Colombia</p>
-              <p className="text-foreground"><strong>Correo electrónico:</strong> <a href="mailto:contacto@verticeeco.com" className="text-accent hover:text-accent/80 underline">contacto@verticeeco.com</a></p>
+              <p className="text-foreground"><strong>Correo electrónico:</strong> <a href="mailto:verticelabortoriodesoluciones@gmail.com" className="text-accent hover:text-accent/80 underline">verticelabortoriodesoluciones@gmail.com</a></p>
               <p className="text-foreground"><strong>Teléfono/WhatsApp:</strong> <a href="tel:+573013717138" className="text-accent hover:text-accent/80">+57 301 3717138</a></p>
               <p className="text-foreground"><strong>Sitio web:</strong> <a href="https://verticeeco.com" className="text-accent hover:text-accent/80 underline">www.verticeeco.com</a></p>
             </div>

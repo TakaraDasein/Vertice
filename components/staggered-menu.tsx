@@ -56,6 +56,23 @@ export const StaggeredMenu = ({
   const openTlRef = useRef<gsap.core.Timeline | null>(null)
   const closeTweenRef = useRef<gsap.core.Tween | null>(null)
 
+  // Fuerza el panel a estar oculto visualmente y en el DOM cuando open es false
+  React.useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) return;
+    if (!open) {
+      panel.style.display = 'none';
+      panel.style.opacity = '0';
+      panel.style.pointerEvents = 'none';
+      panel.style.visibility = 'hidden';
+    } else {
+      panel.style.display = '';
+      panel.style.opacity = '1';
+      panel.style.pointerEvents = '';
+      panel.style.visibility = '';
+    }
+  }, [open]);
+
   // Inicializar contexto de GSAP
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -271,42 +288,44 @@ export const StaggeredMenu = ({
         />
       </header>
 
-      {/* Panel del menú */}
-      <aside
-        id="staggered-menu-panel"
-        ref={panelRef}
-        className="staggered-menu-panel"
-        aria-hidden={!open}
-      >
-        <div className="sm-panel-inner">
-          <ul
-            className="sm-panel-list"
-            role="list"
-            data-numbering={displayItemNumbering || undefined}
-          >
-            {items && items.length ? (
-              items.map((item, idx) => (
-                <li className="sm-panel-itemWrap" key={item.label + idx}>
-                  <a
-                    className="sm-panel-item"
-                    href={item.href}
-                    aria-label={item.ariaLabel}
-                    data-index={idx + 1}
-                  >
-                    <span className="sm-panel-itemLabel">{item.label}</span>
-                  </a>
+      {/* Panel del menú: solo renderiza si open es true */}
+      {open && (
+        <aside
+          id="staggered-menu-panel"
+          ref={panelRef}
+          className="staggered-menu-panel transition-all duration-300 opacity-100 pointer-events-auto visible"
+          aria-hidden={!open}
+        >
+          <div className="sm-panel-inner">
+            <ul
+              className="sm-panel-list"
+              role="list"
+              data-numbering={displayItemNumbering || undefined}
+            >
+              {items && items.length ? (
+                items.map((item, idx) => (
+                  <li className="sm-panel-itemWrap" key={item.label + idx}>
+                    <a
+                      className="sm-panel-item"
+                      href={item.href}
+                      aria-label={item.ariaLabel}
+                      data-index={idx + 1}
+                    >
+                      <span className="sm-panel-itemLabel">{item.label}</span>
+                    </a>
+                  </li>
+                ))
+              ) : (
+                <li className="sm-panel-itemWrap" aria-hidden="true">
+                  <span className="sm-panel-item">
+                    <span className="sm-panel-itemLabel">Sin elementos</span>
+                  </span>
                 </li>
-              ))
-            ) : (
-              <li className="sm-panel-itemWrap" aria-hidden="true">
-                <span className="sm-panel-item">
-                  <span className="sm-panel-itemLabel">Sin elementos</span>
-                </span>
-              </li>
-            )}
-          </ul>
-        </div>
-      </aside>
+              )}
+            </ul>
+          </div>
+        </aside>
+      )}
     </div>
   )
 }

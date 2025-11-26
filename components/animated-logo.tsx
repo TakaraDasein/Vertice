@@ -28,10 +28,11 @@ export default function AnimatedLogo({ className = "" }: { className?: string })
       opacity: 0
     },
     visible: {
-      opacity: [0, 1, 0.8, 1, 0.8],
+      opacity: [0, 1, 0],
       transition: {
         duration: 2,
-        ease: "easeInOut"
+        ease: "easeInOut",
+        times: [0, 0.5, 1]
       }
     }
   }
@@ -104,31 +105,12 @@ export default function AnimatedLogo({ className = "" }: { className?: string })
         filter="url(#glow)"
       />
 
-      {/* Punto de luz que sigue el trazo */}
-      <motion.circle
-        r="8"
-        fill="#ffffff"
-        filter="url(#strongGlow)"
-        initial={{ offsetDistance: "0%", opacity: 0 }}
-        animate={{ 
-          offsetDistance: ["0%", "100%"],
-          opacity: [0, 1, 1, 0]
-        }}
-        transition={{
-          duration: 2,
-          ease: "linear"
-        }}
-        style={{
-          offsetPath: "path('M251.421 161.597C227.924 109.508 201.976 88.4231 160 49C86.369 111.882 53.0836 183.794 50.1981 233.68C47.3127 283.566 76.1681 333.822 122.215 361.535C125.897 297.697 251.421 161.597 251.421 161.597ZM251.421 161.597C297.535 271.189 254.247 334.135 160.871 391')"
-        }}
-      />
-
       {/* Círculo amarillo con animación */}
       <motion.circle 
         cx="190" 
         cy="317" 
         r="20" 
-        fill="#F4EF60"
+        fill="#C75C36"
         variants={circleVariants}
       />
       <motion.circle 
@@ -146,7 +128,7 @@ export default function AnimatedLogo({ className = "" }: { className?: string })
         cx="190" 
         cy="317" 
         r="20" 
-        fill="#F4EF60"
+        fill="#C75C36"
         initial={{ scale: 1, opacity: 0.6 }}
         animate={{ 
           scale: [1, 1.5, 1],

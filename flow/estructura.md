@@ -133,7 +133,7 @@ Objetivo: Cierre y conversión.
 •	Formulario (nombre, correo, mensaje).
 •	Botón directo a WhatsApp y correo institucional.
 •	Redes sociales (LinkedIn, Instagram).
-📧 Sugerencia de correo: contacto@verticeeco.com
+📧 Sugerencia de correo: verticelabortoriodesoluciones@gmail.com
 ________________________________________
 8️⃣ FOOTER
 Contenido mínimo:

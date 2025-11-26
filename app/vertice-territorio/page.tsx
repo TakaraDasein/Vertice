@@ -74,14 +74,8 @@ export default function VerticeTerritorio() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    // Aquí se implementará la integración con la base de datos
     console.log("Solicitud de asesoría:", formData)
-    
-    // Simulación de envío exitoso
     setSubmitted(true)
-    
-    // Resetear formulario después de 3 segundos
     setTimeout(() => {
       setFormData({
         nombre: "",
@@ -107,14 +101,21 @@ export default function VerticeTerritorio() {
       <Header />
       
       <main className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-16 md:pt-20">
+        
+        <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-16 md:pt-20" style={{ backgroundColor: 'var(--primary)' }}>
           <HeroParticles />
-          
-          <div className="container mx-auto px-4 md:px-6 relative z-10 py-12">
-            <div className="text-center max-w-4xl mx-auto flex flex-col items-center justify-center">
-              {/* Logo animado */}
-              <div className="flex flex-col items-center mb-4 md:mb-6">
+
+          {/* Texture overlay to give the hero the new subtle pattern */}
+          <div className="absolute inset-0 pointer-events-none -z-10" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='p' width='12' height='12' patternUnits='userSpaceOnUse' patternTransform='rotate(22.5)'%3E%3Crect width='12' height='12' fill='%231C3D32'/%3E%3Cpath d='M0 0 L0 12' stroke='%23FFFFFF' stroke-opacity='0.03' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            opacity: 0.12,
+            mixBlendMode: 'overlay'
+          }} />
+
+          <div className="container mx-auto px-4 md:px-6 relative z-10 flex items-center justify-center min-h-[60vh]">
+            <div className="text-center max-w-4xl mx-auto">
+              <div className="flex flex-col items-center justify-center mb-4 md:mb-6">
                 <Image
                   src="/vertice.svg"
                   alt="VÉRTICE Logo"
@@ -130,39 +131,22 @@ export default function VerticeTerritorio() {
                 animateBy="words"
                 direction="top"
                 as="h1"
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6"
               />
               <BlurText
                 text="Proyectos reales, impacto medible, transformación territorial"
                 delay={60}
                 animateBy="words"
                 direction="top"
-                className="text-lg md:text-xl text-white/90 mb-8"
+                className="text-lg md:text-xl text-primary-foreground/90 mb-8"
               />
-              <div className="flex flex-wrap justify-center gap-6 text-white/80">
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5" />
-                  <span>Presencia en 8+ territorios</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
-                  <span>1,500+ beneficiarios</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Award className="w-5 h-5" />
-                  <span>15+ proyectos ejecutados</span>
-                </div>
-              </div>
+              {/* Estadísticas removidas por solicitud: se mantiene el hero centrado */}
             </div>
           </div>
 
-          {/* Decorative wave */}
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-background" style={{
-            clipPath: "polygon(0 50%, 100% 0, 100% 100%, 0 100%)"
-          }}></div>
+          {/* bottom decorative bar removed as requested */}
         </section>
 
-        {/* Proyectos Realizados */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
@@ -187,14 +171,12 @@ export default function VerticeTerritorio() {
           </div>
         </section>
 
-        {/* Franja Verde Decorativa */}
         <div className="h-24 bg-gradient-to-r from-primary via-accent to-primary flex items-center justify-center">
           <p className="text-white text-lg md:text-xl font-semibold text-center px-4">
             ¿Tienes una iniciativa ambiental? Postula para recibir asesoría
           </p>
         </div>
 
-        {/* Convocatoria Section */}
         <section className="py-20 bg-background relative overflow-hidden">
           <div className="absolute top-10 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 left-10 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
@@ -213,7 +195,6 @@ export default function VerticeTerritorio() {
               </div>
 
               <Card className="overflow-hidden">
-                {/* Franja verde superior */}
                 <div className="h-3 bg-gradient-to-r from-primary via-accent to-primary"></div>
                 
                 <CardContent className="p-8">
@@ -395,7 +376,6 @@ export default function VerticeTerritorio() {
           </div>
         </section>
 
-        {/* Franja Verde Final */}
         <div className="h-2 bg-gradient-to-r from-primary via-accent to-primary"></div>
       </main>
 

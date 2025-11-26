@@ -11,6 +11,9 @@ interface Particle {
   opacity: number
   rotation: number
   rotationSpeed: number
+  baseOpacity: number // Opacidad base antes de aplicar fade
+  age: number // Edad de la partícula para controlar fade in/out
+  lifespan: number // Tiempo de vida total
 }
 
 export default function HeroParticles() {
@@ -42,23 +45,27 @@ export default function HeroParticles() {
       logoImageRef.current = img
     }
 
-    // Initialize particles with 3 sizes, falling like leaves
+    // Initialize particles with smooth floating motion
     const initParticles = () => {
       const particles: Particle[] = []
-      const sizes = [10, 14, 18] // 3 different sizes - small, medium, larger
-      const opacities = [0.15, 0.25, 0.35] // 3 opacity levels
-      
-      for (let i = 0; i < 30; i++) {
+      const sizes = [10, 14, 18]
+      // Opacidades reducidas nuevamente, pero un poco más visibles que el original
+      const opacities = [0.2, 0.3, 0.4]
+
+      for (let i = 0; i < 35; i++) {
         const sizeIndex = i % 3
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5, // Horizontal drift
-          vy: 0.2 + Math.random() * 0.15, // Slower, more consistent falling speed
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
           size: sizes[sizeIndex],
-          opacity: opacities[sizeIndex],
-          rotation: Math.random() * Math.PI * 2, // Random initial rotation
-          rotationSpeed: (Math.random() - 0.5) * 0.02 // Slow rotation while falling
+          opacity: 0, // Inicia en 0 para fade in
+          baseOpacity: opacities[sizeIndex],
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.01,
+          age: Math.random() * 2000,
+          lifespan: 15000 + Math.random() * 5000
         })
       }
       particlesRef.current = particles
@@ -75,45 +82,62 @@ export default function HeroParticles() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      particlesRef.current.forEach((particle) => {
-        // Mouse interaction - particles react to cursor
-        const dx = mouseRef.current.x - particle.x
-        const dy = mouseRef.current.y - particle.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-        const maxDistance = 100 // Smaller repulsion area
+      // Se eliminó la lógica de dibujo de líneas de conexión
 
-        if (distance < maxDistance) {
-          const force = (maxDistance - distance) / maxDistance
-          particle.vx -= (dx / distance) * force * 0.1
-          particle.vy -= (dy / distance) * force * 0.1
+      particlesRef.current.forEach((particle, index) => {
+        // Incrementar edad de la partícula
+        particle.age += 16
+
+        // Calcular fade in/out
+        const fadeInDuration = 1500
+        const fadeOutDuration = 2000
+        let alphaMod = 1
+
+        if (particle.age < fadeInDuration) {
+          alphaMod = particle.age / fadeInDuration
+        } else if (particle.age > particle.lifespan - fadeOutDuration) {
+          alphaMod = (particle.lifespan - particle.age) / fadeOutDuration
         }
 
-        // Falling leaf motion - add oscillation
-        particle.vx += Math.sin(Date.now() * 0.001 + particle.x) * 0.01
-        
-        // Update position
+        particle.opacity = particle.baseOpacity * alphaMod
+
+        // Regenerar partícula
+        if (particle.age >= particle.lifespan) {
+          particle.x = Math.random() * canvas.width
+          particle.y = Math.random() * canvas.height
+          particle.vx = (Math.random() - 0.5) * 0.2
+          particle.vy = (Math.random() - 0.5) * 0.2
+          particle.age = 0
+          particle.lifespan = 15000 + Math.random() * 5000
+          particle.rotation = Math.random() * Math.PI * 2
+        }
+
+        // Movimiento flotante
+        const time = Date.now() * 0.0003
+        particle.vx += Math.sin(time + particle.x * 0.01) * 0.002
+        particle.vy += Math.cos(time + particle.y * 0.01) * 0.002
+
         particle.x += particle.vx
         particle.y += particle.vy
 
-        // Add slight friction to horizontal movement
-        particle.vx *= 0.98
-
-        // Update rotation for falling leaf effect
+        particle.vx *= 0.995
+        particle.vy *= 0.995
         particle.rotation += particle.rotationSpeed
 
-        // Boundary check - only wrap horizontally, no regeneration vertically
-        if (particle.x < -particle.size * 2) particle.x = canvas.width + particle.size
-        if (particle.x > canvas.width + particle.size * 2) particle.x = -particle.size
+        // Boundary check
+        if (particle.x < -50) particle.x = canvas.width + 50
+        if (particle.x > canvas.width + 50) particle.x = -50
+        if (particle.y < -50) particle.y = canvas.height + 50
+        if (particle.y > canvas.height + 50) particle.y = -50
 
-        // Draw particle with rotation
+        // Draw particle
         ctx.save()
         ctx.globalAlpha = particle.opacity
         ctx.translate(particle.x, particle.y)
         ctx.rotate(particle.rotation)
 
         if (logoImageRef.current) {
-          // Maintain original aspect ratio from SVG (320x440)
-          const aspectRatio = 440 / 320 // height / width
+          const aspectRatio = 440 / 320
           const width = particle.size
           const height = particle.size * aspectRatio
           ctx.drawImage(
@@ -132,7 +156,6 @@ export default function HeroParticles() {
     }
     animate()
 
-    // Cleanup
     return () => {
       window.removeEventListener("resize", resizeCanvas)
       window.removeEventListener("mousemove", handleMouseMove)
@@ -146,7 +169,6 @@ export default function HeroParticles() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.8 }}
     />
   )
 }

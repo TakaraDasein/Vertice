@@ -43,8 +43,8 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
               selected?.id === card.id
                 ? "rounded-lg absolute inset-0 h-full w-full m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                 : lastSelected?.id === card.id
-                ? "z-40 bg-white rounded-xl h-full w-full"
-                : "bg-white rounded-xl h-full w-full"
+                  ? "z-40 bg-white rounded-xl h-full w-full"
+                  : "bg-white rounded-xl h-full w-full"
             )}
             layout
             layoutId={`card-${card.id}`}
@@ -102,7 +102,7 @@ const BlurOverlay = ({ card }: { card: Card }) => {
       layoutId={`blur-${card.id}`}
       className="absolute inset-0 bg-black/50 backdrop-blur-[1px] z-20 flex items-end p-1.5 md:p-2"
     >
-      <h3 className="text-white font-bold leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ fontSize: '24px' }}>
+      <h3 className="text-white font-bold leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-lg md:text-xl lg:text-2xl">
         {card.title}
       </h3>
     </motion.div>

@@ -280,9 +280,9 @@ main.zoom-scroll-main {
     visibility: visible;
   }
   
-  /* Estado de salida: zoom hacia afuera con blur */
+  /* Estado de salida: zoom hacia afuera sin blur */
   100% {
-    filter: blur(var(--zoom-blur-exit));
+    filter: blur(0);
     transform: scale(1.5);
     opacity: 0;
     visibility: hidden;
@@ -328,16 +328,34 @@ main.zoom-scroll-main {
 }
 
 /* 8. Ajustes móviles */
+/* 8. Ajustes móviles - Desactivar Zoom Scroll */
 @media (max-width: 768px) {
-  .zoom-content {
-    /* Reducimos el blur en móviles para mejor performance */
-    --zoom-blur: 3rem;
-    --zoom-blur-exit: 2rem;
-  }
-  
   html {
-    /* Scroll snap más relajado en móviles */
-    scroll-snap-type: y proximity;
+    /* Desactivar scroll snap en móviles */
+    scroll-snap-type: none;
+  }
+
+  .zoom-section {
+    /* Altura automática para permitir scroll natural */
+    height: auto;
+    min-height: 100vh;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    view-timeline: none;
+  }
+
+  .zoom-content {
+    /* Posición relativa para flujo normal del documento */
+    position: relative;
+    inset: auto;
+    height: auto;
+    
+    /* Desactivar animaciones de zoom */
+    animation: none;
+    transform: none;
+    filter: none;
+    opacity: 1;
+    visibility: visible;
   }
 }
 

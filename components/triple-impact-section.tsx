@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import BlurText from "@/components/blur-text"
 import HeroParticles from "@/components/hero-particles"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface ImpactArea {
   id: string
@@ -23,7 +24,7 @@ const impactAreas: ImpactArea[] = [
     subtitle: "Fortalecimiento Comunitario",
     description:
       "Promovemos la equidad social a través de procesos participativos y gobernanza local que empoderan a las comunidades.",
-    color: "#285046",
+    color: "#6B9BD5",
     icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Cheerful%20Curly-Haired%20Man%20in%20Tortoiseshell%20Glasses-qcyt7MgPpv1uxX6SVC6Kw9vAGjhFVL.png",
     metrics: [
       { label: "Comunidades Fortalecidas", value: "150+" },
@@ -36,7 +37,7 @@ const impactAreas: ImpactArea[] = [
     title: "Impacto Ambiental",
     subtitle: "Conservación Ecosistémica",
     description: "Desarrollamos soluciones innovadoras para la conservación y restauración de ecosistemas naturales.",
-    color: "#34c4a4",
+    color: "#5A8F69",
     icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Smiling%20Man%20Portrait-jhqh7VDtYaxbfkm2A4HzQoi5aoU0eV.png",
     metrics: [
       { label: "Hectáreas Restauradas", value: "2,500" },
@@ -50,7 +51,7 @@ const impactAreas: ImpactArea[] = [
     subtitle: "Modelos Sostenibles",
     description:
       "Generamos modelos económicos sostenibles que benefician tanto a las comunidades como al medio ambiente.",
-    color: "#dc8e57",
+    color: "#E6B280",
     icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Confident%20Professional%20with%20a%20Friendly%20Demeanor-mtClJxSLBxN7WvaY5CrMI2k6kNRMQa.png",
     metrics: [
       { label: "Empleos Generados", value: "1,200" },
@@ -65,24 +66,24 @@ export default function TripleImpactSection() {
   const [rotation, setRotation] = useState(0)
   const [isMounted, setIsMounted] = useState(false)
   const [screenSize, setScreenSize] = useState({ width: 1024, height: 768 })
-  
+
   useEffect(() => {
     setIsMounted(true)
     setScreenSize({ width: window.innerWidth, height: window.innerHeight })
-    
+
     const handleResize = () => {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight })
     }
-    
+
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
-  
+
   useEffect(() => {
-    // Auto-rotate through impact areas every 3 seconds
+    // Auto-rotate through impact areas every 5 seconds (slower for better readability)
     const interval = setInterval(() => {
       setActiveArea((prev) => (prev + 1) % impactAreas.length)
-    }, 3000)
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [])
@@ -91,29 +92,40 @@ export default function TripleImpactSection() {
     // Continuous smooth orbit rotation using requestAnimationFrame
     let animationId: number
     let lastTime = Date.now()
-    
+
     const animate = () => {
       const currentTime = Date.now()
       const deltaTime = currentTime - lastTime
       lastTime = currentTime
-      
+
       setRotation((prev) => (prev + (deltaTime * 0.02)) % 360) // Smooth rotation speed
       animationId = requestAnimationFrame(animate)
     }
-    
+
     animationId = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(animationId)
   }, [])
 
   const currentArea = impactAreas[activeArea]
 
-  return (
-    <section className="panel h-screen flex items-center justify-center relative overflow-hidden bg-[#476A47]">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#476A47] via-[#476A47]/80 to-[#476A47]"></div>
+  const borderColor = 'white'
+  const particleOpacity = 0.6
 
-      {/* Animated Logo Particles */}
-      <HeroParticles />
+  return (
+    <section className="panel min-h-screen flex items-center justify-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1C3D32, #0f221c)' }}>
+      {/* Textura poligonal triangular elegante */}
+      <div
+        className="absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="1"%3E%3Cpath d="M30 30L0 0v60l30-30zM30 30l30-30v60L30 30z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+          backgroundSize: '60px 60px'
+        }}
+      />
+
+      {/* Animated Logo Particles ajustadas para fondos coloreados */}
+      <div style={{ opacity: particleOpacity }}>
+        <HeroParticles />
+      </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 pt-16 md:pt-20">
         {/* Main Content */}
@@ -121,80 +133,87 @@ export default function TripleImpactSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-start">
             {/* Left Side - Content */}
             <div className="space-y-4 md:space-y-6">
-              <Card className="animate-in bg-white/10 backdrop-blur-sm border-white/20 shadow-lg p-4 md:p-6">
-                <CardContent className="pt-0">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                    <div
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center overflow-hidden border-2 border-white/40 transition-all duration-300 flex-shrink-0"
-                      style={{ backgroundColor: currentArea.color }}
-                    >
-                      <img
-                        src={currentArea.icon || "/placeholder.svg"}
-                        alt={`${currentArea.title} representative`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <BlurText
-                        text={currentArea.title}
-                        delay={80}
-                        animateBy="words"
-                        direction="top"
-                        as="h3"
-                        className="text-xl md:text-2xl font-bold text-white"
-                      />
-                      <BlurText
-                        text={currentArea.subtitle}
-                        delay={60}
-                        animateBy="words"
-                        direction="top"
-                        className="text-sm md:text-base font-medium text-white/80"
-                      />
-                    </div>
-                  </div>
-                  <BlurText
-                    text={currentArea.description}
-                    delay={50}
-                    animateBy="words"
-                    direction="top"
-                    className="text-white text-sm md:text-base leading-relaxed"
-                  />
-                </CardContent>
-              </Card>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentArea.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Card className="bg-white/95 backdrop-blur-sm border-[#D4CFC7] shadow-xl p-4 md:p-6 overflow-hidden relative">
+                    {/* Decorative top border */}
+                    <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: currentArea.color }}></div>
+
+                    <CardContent className="pt-4">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                        <div
+                          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center overflow-hidden border-2 transition-all duration-300 flex-shrink-0 shadow-lg"
+                          style={{ backgroundColor: currentArea.color, borderColor }}
+                        >
+                          <img
+                            src={currentArea.icon || "/placeholder.svg"}
+                            alt={`${currentArea.title} representative`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="text-xl md:text-2xl font-bold text-black">
+                            {currentArea.title}
+                          </h3>
+                          <p className="text-sm md:text-base font-medium text-gray-700">
+                            {currentArea.subtitle}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-[#4F4F4F] text-sm md:text-base leading-relaxed mb-6">
+                        {currentArea.description}
+                      </p>
+
+                      {/* Metrics Grid */}
+                      <div className="grid grid-cols-3 gap-2 md:gap-4 pt-4 border-t border-gray-100">
+                        {currentArea.metrics.map((metric, idx) => (
+                          <div key={idx} className="text-center">
+                            <p className="text-lg md:text-xl font-bold" style={{ color: currentArea.color }}>{metric.value}</p>
+                            <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-wide">{metric.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </AnimatePresence>
 
               {/* Progress Indicator */}
-              <div className="animate-in flex justify-center gap-2">
+              <div className="flex justify-center gap-2">
                 {impactAreas.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${
-                      index === activeArea ? "bg-white scale-125" : "bg-white/30"
-                    }`}
+                    className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 cursor-pointer ${index === activeArea ? "scale-125" : "bg-[#1C3D32]/30"
+                      }`}
+                    style={{ backgroundColor: index === activeArea ? currentArea.color : undefined }}
+                    onClick={() => setActiveArea(index)}
                   />
                 ))}
               </div>
 
               {/* Navigation Buttons */}
-              <div className="animate-in flex justify-center gap-3 md:gap-4">
+              <div className="flex justify-center gap-3 md:gap-4">
                 <Button
                   onClick={() => setActiveArea((prev) => (prev - 1 + impactAreas.length) % impactAreas.length)}
                   variant="outline"
-                  size="icon"
-                  className="bg-white border-primary text-primary hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 w-12 h-12 active:scale-90 hover:scale-110"
+                  size="sm"
+                  className="bg-white/95 border-[#1C3D32]/20 text-[#1C3D32] hover:bg-[#1C3D32] hover:text-white transition-all shadow-md"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
+                  Anterior
                 </Button>
                 <Button
                   onClick={() => setActiveArea((prev) => (prev + 1) % impactAreas.length)}
                   variant="outline"
-                  size="icon"
-                  className="bg-white border-primary text-primary hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 w-12 h-12 active:scale-90 hover:scale-110"
+                  size="sm"
+                  className="bg-white/95 border-[#1C3D32]/20 text-[#1C3D32] hover:bg-[#1C3D32] hover:text-white transition-all shadow-md"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
+                  Siguiente
                 </Button>
               </div>
             </div>
@@ -203,11 +222,11 @@ export default function TripleImpactSection() {
             <div className="flex items-center justify-center h-full min-h-[350px] md:min-h-[400px]">
               <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px]">
                 {/* Central Core */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-white/30 shadow-lg backdrop-blur-sm border-2 border-white/50" />
-                
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-[#1C3D32]/20 shadow-lg backdrop-blur-sm border-2 border-[#1C3D32]/40" />
+
                 {/* Orbital Path */}
-                <div className="absolute inset-0 rounded-full border-2 border-dashed border-white/20" />
-                
+                <div className="absolute inset-0 rounded-full border-2 border-dashed border-[#1C3D32]/20" />
+
                 {/* Orbiting Circles */}
                 {impactAreas.map((area, index) => {
                   const angle = (index * 120 + rotation - 90) * (Math.PI / 180)
@@ -215,7 +234,7 @@ export default function TripleImpactSection() {
                   const x = Math.cos(angle) * radius
                   const y = Math.sin(angle) * radius
                   const isActive = index === activeArea
-                  
+
                   return (
                     <div
                       key={area.id}
@@ -231,24 +250,25 @@ export default function TripleImpactSection() {
                         <div
                           className="absolute inset-0 rounded-full animate-pulse"
                           style={{
-                            background: `radial-gradient(circle, ${area.color}40 0%, transparent 70%)`,
-                            width: '140%',
-                            height: '140%',
-                            left: '-20%',
-                            top: '-20%',
+                            background: `radial-gradient(circle, ${area.color}60 0%, transparent 70%)`,
+                            width: '160%',
+                            height: '160%',
+                            left: '-30%',
+                            top: '-30%',
+                            filter: 'blur(8px)'
                           }}
                         />
                       )}
-                      
+
                       {/* Main Circle */}
                       <div
-                        className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full transition-all duration-700 shadow-lg group-hover:scale-110 ${
-                          isActive ? 'ring-2 sm:ring-3 md:ring-4 ring-white ring-offset-1 sm:ring-offset-2' : 'ring-1 sm:ring-2 ring-white/30'
-                        }`}
+                        className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full transition-all duration-700 shadow-lg group-hover:scale-110 ${isActive ? 'ring-2 sm:ring-3 md:ring-4 ring-offset-1 sm:ring-offset-2' : 'ring-1 sm:ring-2 ring-[#1C3D32]/30'
+                          }`}
                         style={{
                           backgroundColor: area.color,
+                          borderColor: isActive ? area.color : 'transparent',
                           boxShadow: isActive
-                            ? `0 0 40px ${area.color}80, 0 0 80px ${area.color}40`
+                            ? `0 0 50px ${area.color}90, 0 0 100px ${area.color}50`
                             : `0 4px 20px ${area.color}60`,
                         }}
                       >
@@ -259,7 +279,7 @@ export default function TripleImpactSection() {
                             background: `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 60%)`,
                           }}
                         />
-                        
+
                         {/* Rotating Border (only active) */}
                         {isActive && (
                           <div className="absolute -inset-1 rounded-full opacity-75 animate-spin-slow">
@@ -271,7 +291,7 @@ export default function TripleImpactSection() {
                             />
                           </div>
                         )}
-                        
+
                         {/* Icon/Image */}
                         <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-white/40 backdrop-blur-sm">
                           <img
@@ -281,10 +301,10 @@ export default function TripleImpactSection() {
                           />
                         </div>
                       </div>
-                      
+
                       {/* Label (only active) */}
                       {isActive && (
-                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
                           <p className="text-xs md:text-sm font-bold text-center" style={{ color: area.color }}>
                             {area.title.replace('Impacto ', '')}
                           </p>
