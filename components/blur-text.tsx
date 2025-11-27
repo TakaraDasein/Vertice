@@ -96,7 +96,7 @@ const BlurText = ({
   const Component = motion[as] as any
 
   return (
-    <Component ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', ...style }}>
+    <Component ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', ...style }}>
       {elements.map((segment: string, index: number) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots)
 

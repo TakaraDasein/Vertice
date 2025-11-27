@@ -5,15 +5,16 @@ import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import HeroParticles from "@/components/hero-particles"
-import { FileText, ChevronRight, Award } from "lucide-react"
+import { FileText, ChevronRight, Award, Linkedin } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function NosotrosSection() {
 
   const oscarProfile = {
-    name: "Oscar Abel Bermeo Sotelo",
+    name: "Oscar Bermeo",
     position: "Fundador y Director | VÉRTICE",
-    shortBio: "Profesional con más de 15 años de experiencia en cooperación internacional, sostenibilidad y desarrollo territorial. Especialista en triple impacto y empresas B.",
+    shortBio: `Oscar Abel Bermeo Sotelo es consultor senior en sostenibilidad y desarrollo territorial. Politólogo, especialista en Gerencia Social, con estudios en alta gerencia y magíster en Sostenibilidad, cuenta con más de 15 años liderando proyectos estratégicos con Naciones Unidas, ONG internacionales, sector público y empresas privadas. Posee experiencia en coordinación interinstitucional, diseño de modelos de impacto, gestión de riesgos climáticos y construcción de alianzas.
+Fundó VÉRTICE como un laboratorio de soluciones que integra estrategia, sostenibilidad e innovación para acompañar a organizaciones del sector privado, publico e iniciativas de la sociedad civil que buscan transformar su impacto social y ambiental.`,
     expertise: [
       "Cooperación Internacional",
       "Sostenibilidad & Triple Impacto",
@@ -192,6 +193,20 @@ export default function NosotrosSection() {
                             <ChevronRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                           </Button>
                         </Link>
+                        <a
+                          href="https://www.linkedin.com/in/oscarbermeo/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1"
+                        >
+                          <Button
+                            className="w-full bg-[#0A66C2] hover:bg-[#0a5bb8] text-white transition-all shadow-md hover:shadow-lg group py-3 md:py-4 lg:py-5 rounded-xl text-xs md:text-sm flex items-center justify-center gap-3"
+                            aria-label="Abrir LinkedIn de Oscar Bermeo"
+                          >
+                            <Linkedin className="w-4 h-4" />
+                            <span>LinkedIn</span>
+                          </Button>
+                        </a>
                       </motion.div>
 
                       {/* Link a CV */}

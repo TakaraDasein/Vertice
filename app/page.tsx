@@ -133,7 +133,7 @@ export default function VerticeHome() {
               {/* Header */}
               <div className="text-center pt-3 md:pt-4 pb-2 md:pb-4 px-3 md:px-4 relative z-10 max-w-4xl mx-auto">
                 <h4 className="animate-in font-bold text-white mb-2 md:mb-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-tight leading-snug">
-                  De la comprensión del territorio a soluciones sostenibles y medibles
+                  Nuestro modelo de trabajo integra tres momentos clave que garantizan soluciones.
                 </h4>
               </div>
 
@@ -144,12 +144,7 @@ export default function VerticeHome() {
                 <InteractiveModel />
               </div>
 
-              {/* Closing Statement */}
-              <div className="text-center px-4 md:px-6 pb-8 md:pb-12">
-                <p className="animate-in text-xs md:text-sm lg:text-base text-white font-medium leading-relaxed max-w-3xl mx-auto">
-                  En VÉRTICE unimos la comprensión humana del territorio con el rigor técnico del análisis de datos. Así convertimos la sostenibilidad en una ruta concreta, medible y transformadora.
-                </p>
-              </div>
+              {/* Closing Statement removed as requested */}
             </div>
           </div>
         </section>

@@ -130,16 +130,26 @@ export default function VerticeTerritorio() {
                 delay={80}
                 animateBy="words"
                 direction="top"
-                as="h1"
+                as="h2"
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6"
               />
-              <BlurText
-                text="Proyectos reales, impacto medible, transformación territorial"
-                delay={60}
-                animateBy="words"
-                direction="top"
-                className="text-lg md:text-xl text-primary-foreground/90 mb-8"
-              />
+              <div className="max-w-3xl mx-auto mb-8">
+                <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm">
+                  <p className="text-lg md:text-xl text-primary-foreground font-semibold mb-4 text-center">Impulsamos iniciativas que transforman realidades desde lo local</p>
+
+                  <p className="text-sm md:text-base text-primary-foreground/90 mb-4">
+                    En VÉRTICE creemos que la sostenibilidad real nace en el territorio: en las organizaciones, colectivos y proyectos que trabajan todos los días por proteger ecosistemas, fortalecer comunidades y construir soluciones desde el territorio.
+                  </p>
+
+                  <p className="text-sm md:text-base text-primary-foreground/90 mb-4">
+                    Por eso creamos el Programa VÉRTICE Territorio, una iniciativa que brinda asistencia técnica accesible a proyectos ambientales y sociales con alto potencial de impacto. (Selección según alineación e impacto potencial.)
+                  </p>
+
+                  <p className="text-sm md:text-base text-primary-foreground/90">
+                    Acompañamos procesos que necesitan metodología, claridad estratégica y medición — incluso cuando no cuentan con grandes recursos — porque estamos convencidos de que el triple impacto se construye amplificando las soluciones que ya están transformando el territorio.
+                  </p>
+                </div>
+              </div>
               {/* Estadísticas removidas por solicitud: se mantiene el hero centrado */}
             </div>
           </div>

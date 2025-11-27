@@ -60,7 +60,7 @@ export default function Header() {
     { label: '¿Qué es Vértice?', sectionId: 'section-1' },
     { label: 'Nosotros', sectionId: 'section-2' },
     { label: 'Triple Impacto', sectionId: 'section-3' },
-    { label: 'Servicios', sectionId: 'section-4' },
+    { label: 'Nuestros Servicios', sectionId: 'section-4' },
     { label: 'Nuestro modelo', sectionId: 'section-5' },
     { label: 'Contacto', sectionId: 'section-6' }
   ]

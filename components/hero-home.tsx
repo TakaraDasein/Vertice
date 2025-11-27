@@ -57,7 +57,7 @@ export default function HeroHome() {
   ]
 
   return (
-    <section ref={containerRef} className="h-full flex items-center justify-center relative overflow-hidden pt-16 md:pt-20">
+    <section ref={containerRef} className="h-full flex items-center justify-center relative overflow-hidden pt-12 md:pt-16">
       {/* Background Layers */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1C3D32] via-[#152e26] to-[#0f221c] pointer-events-none"></div>
 
@@ -88,7 +88,7 @@ export default function HeroHome() {
       <HeroParticles />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-8 py-12 w-full max-w-4xl mx-auto mt-12 md:mt-16">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-8 py-8 w-full max-w-4xl mx-auto mt-12 md:mt-16">
 
         {/* Logo & Title */}
         <div className="text-center mb-6 md:mb-8 flex flex-col items-center">
@@ -96,12 +96,12 @@ export default function HeroHome() {
             <AnimatedLogo className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 mb-2 sm:mb-3 transition-transform duration-300 hover:scale-110 cursor-pointer" />
           </Link>
           <BlurText
-            text="Vértice"
+            text="VÉRTICE"
             delay={100}
             animateBy="letters"
             direction="top"
             as="h1"
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold drop-shadow-[0_0_30px_rgba(94,136,122,0.4)] tracking-wide"
+            className="text-2xl sm:text-2xl md:text4xl lg:text-2xl font-bold drop-shadow-[0_0_30px_rgba(94,136,122,0.4)] tracking-wide"
             style={{ color: '#FFFFFF' }}
           />
         </div>

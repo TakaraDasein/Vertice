@@ -28,7 +28,7 @@ interface ImpactArea {
   color: string
   // icon component from lucide-react
   icon: any
-  metrics: { label: string; value: string }[]
+  metrics?: { label: string; value: string }[]
 }
 
 // Centro: definición del Triple Impacto que entra en el loop como primer item
@@ -40,7 +40,6 @@ const centerArea: ImpactArea = {
     'El triple impacto es un modelo empresarial que mide el éxito no solo por los resultados financieros, sino también por el impacto social y ambiental. En otras palabras: una empresa de triple impacto genera utilidades, mejora la vida de las personas y cuida el planeta, todo al mismo tiempo y con el mismo nivel de importancia.',
   color: '#D4CFC7',
   icon: Network3,
-  metrics: [],
 }
 
 const impactAreas: ImpactArea[] = [
@@ -52,11 +51,7 @@ const impactAreas: ImpactArea[] = [
       "Promovemos la equidad social a través de procesos participativos y gobernanza local que empoderan a las comunidades.",
     color: "#6B9BD5",
     icon: Users,
-    metrics: [
-      { label: "Comunidades Fortalecidas", value: "150+" },
-      { label: "Procesos Participativos", value: "85%" },
-      { label: "Líderes Capacitados", value: "500+" },
-    ],
+    
   },
   {
     id: "environmental",
@@ -65,11 +60,7 @@ const impactAreas: ImpactArea[] = [
     description: "Desarrollamos soluciones innovadoras para la conservación y restauración de ecosistemas naturales.",
     color: "#5A8F69",
     icon: Leaf,
-    metrics: [
-      { label: "Hectáreas Restauradas", value: "2,500" },
-      { label: "Especies Protegidas", value: "45" },
-      { label: "Proyectos Ambientales", value: "120+" },
-    ],
+    
   },
   {
     id: "economic",
@@ -79,11 +70,7 @@ const impactAreas: ImpactArea[] = [
       "Generamos modelos económicos sostenibles que benefician tanto a las comunidades como al medio ambiente.",
     color: "#E6B280",
     icon: TrendingUp,
-    metrics: [
-      { label: "Empleos Generados", value: "1,200" },
-      { label: "Ingresos Incrementados", value: "40%" },
-      { label: "Empresas Sostenibles", value: "75+" },
-    ],
+    
   },
 ]
 
@@ -208,15 +195,17 @@ export default function TripleImpactSection() {
                         {currentArea.description}
                       </p>
 
-                      {/* Metrics Grid */}
-                      <div className="grid grid-cols-3 gap-2 md:gap-4 pt-4 border-t border-gray-100">
-                        {currentArea.metrics.map((metric, idx) => (
-                          <div key={idx} className="text-center">
-                            <p className="text-lg md:text-xl font-bold" style={{ color: currentArea.color }}>{metric.value}</p>
-                            <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-wide">{metric.label}</p>
-                          </div>
-                        ))}
-                      </div>
+                      {/* Metrics Grid (render only if metrics exist) */}
+                      {currentArea.metrics && currentArea.metrics.length > 0 && (
+                        <div className="grid grid-cols-3 gap-2 md:gap-4 pt-4 border-t border-gray-100">
+                          {currentArea.metrics.map((metric, idx) => (
+                            <div key={idx} className="text-center">
+                              <p className="text-lg md:text-xl font-bold" style={{ color: currentArea.color }}>{metric.value}</p>
+                              <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-wide">{metric.label}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
                 </motion.div>
