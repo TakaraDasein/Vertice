@@ -11,9 +11,9 @@ type Props = {
   className?: string
 }
 
-export default function TriangleButton({ href = "/downloads/paquetes-servicios.txt", download = true, title = "Descargar paquetes de servicios", className = "" }: Props) {
+export default function TriangleButton({ href = "/services/packages", download = false, title = "Ver paquetes de servicios", className = "" }: Props) {
   return (
-    <Link href={href} download={download} aria-label={title} title={title} className={`inline-block relative ${className}`}>
+    <Link href={href} aria-label={title} title={title} className={`inline-block relative ${className}`}>
       <svg viewBox="0 0 24 24" width="36" height="36" role="img" aria-hidden="false" focusable="false">
         <polygon points="12,3 3,21 21,21" fill="#CE5C36" />
       </svg>

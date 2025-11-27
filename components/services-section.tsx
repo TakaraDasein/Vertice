@@ -6,7 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import BlurText from "@/components/blur-text";
 import HeroParticles from "@/components/hero-particles";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lightbulb, Globe, Recycle, Sprout } from "lucide-react";
+import { Lightbulb, Globe, Recycle, Sprout, Play, Pause } from "lucide-react";
+import Link from "next/link";
 
 interface ServiceArea {
   id: string;
@@ -66,6 +67,7 @@ export default function ServicesSection() {
   const [rotation, setRotation] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const [screenSize, setScreenSize] = useState({ width: 1024, height: 768 });
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -77,11 +79,12 @@ export default function ServicesSection() {
   }, []);
 
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
       setActiveService((prev) => (prev + 1) % services.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   useEffect(() => {
     let animationId: number;
@@ -171,9 +174,30 @@ export default function ServicesSection() {
                 ))}
               </div>
 
-              <div className="flex justify-center gap-3 md:gap-4">
-                <Button onClick={() => setActiveService((p) => (p - 1 + services.length) % services.length)} variant="outline" size="sm" className="bg-white/95 border-[#1C3D32]/20 text-[#1C3D32] hover:bg-[#1C3D32] hover:text-white transition-all shadow-md">Anterior</Button>
-                <Button onClick={() => setActiveService((p) => (p + 1) % services.length)} variant="outline" size="sm" className="bg-white/95 border-[#1C3D32]/20 text-[#1C3D32] hover:bg-[#1C3D32] hover:text-white transition-all shadow-md">Siguiente</Button>
+              <div className="flex flex-col items-center">
+                <div className="flex justify-center gap-3 md:gap-4 items-center">
+                  <Button onClick={() => setActiveService((p) => (p - 1 + services.length) % services.length)} variant="outline" size="sm" className="bg-white/95 border-[#1C3D32]/20 text-[#1C3D32] hover:bg-[#1C3D32] hover:text-white transition-all shadow-md">Anterior</Button>
+
+                  <Button
+                    onClick={() => setIsPaused((p) => !p)}
+                    variant="outline"
+                    size="sm"
+                    aria-pressed={isPaused}
+                    aria-label={isPaused ? "Reanudar rotación" : "Pausar rotación"}
+                    className="bg-white/95 border-[#1C3D32]/20 text-[#1C3D32] hover:bg-[#1C3D32] hover:text-white transition-all shadow-md flex items-center gap-2"
+                  >
+                    {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+                    <span className="hidden md:inline">{isPaused ? "Reanudar" : "Pausar"}</span>
+                  </Button>
+
+                  <Button onClick={() => setActiveService((p) => (p + 1) % services.length)} variant="outline" size="sm" className="bg-white/95 border-[#1C3D32]/20 text-[#1C3D32] hover:bg-[#1C3D32] hover:text-white transition-all shadow-md">Siguiente</Button>
+                </div>
+
+                <div className="mt-3">
+                  <Link href="/services/packages">
+                    <Button variant="ghost" size="sm" className="bg-white/95 text-[#1C3D32] border border-transparent hover:bg-[#1C3D32] hover:text-white transition-all shadow-sm">Ver paquetes</Button>
+                  </Link>
+                </div>
               </div>
             </div>
 

@@ -125,6 +125,16 @@ export default function HeroHome() {
               Vértice Territorio
             </a>
             <a
+              href="/vertice-en-accion"
+              className="group relative px-5 py-2.5 bg-white/6 hover:bg-white/14 backdrop-blur-sm border border-white/10 text-white font-medium rounded-full transition-all duration-300 text-xs sm:text-sm active:scale-95 hover:scale-105 flex items-center gap-2 shadow-[0_0_12px_rgba(0,0,0,0.08)] hover:shadow-[0_0_18px_rgba(94,136,122,0.18)]"
+              aria-label="Vértice en Acción"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[#F5D76E] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M12 2a1 1 0 0 1 .993.883L13 3v8h7a1 1 0 0 1 .117 1.993L20 13h-7v7a1 1 0 0 1-1.993.117L11 20v-7H4a1 1 0 0 1-.117-1.993L4 11h7V3a1 1 0 0 1 1-1z" />
+              </svg>
+              Vértice en Acción
+            </a>
+            <a
               href="mailto:verticelabortoriodesoluciones@gmail.com"
               className="group px-5 py-2.5 bg-[#CE5C36] hover:bg-[#E06D45] text-white font-medium rounded-full transition-all duration-300 text-xs sm:text-sm active:scale-95 hover:scale-105 flex items-center gap-2 shadow-lg hover:shadow-[#CE5C36]/40"
             >
