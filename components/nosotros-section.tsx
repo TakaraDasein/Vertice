@@ -217,7 +217,8 @@ Fundó VÉRTICE como un laboratorio de soluciones que integra estrategia, sosten
                         className="text-center mt-2 md:mt-3"
                       >
                         <a
-                          href="/cv-oscar-bermeo.html"
+                          href="/downloads/CV%20Oscar%20Abel%20Bermeo%20Sotelo%20.pdf"
+                          download
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center text-[#6B6B6B] hover:text-[#1C3D32] transition-colors text-xs hover:underline underline-offset-4 gap-2 group"

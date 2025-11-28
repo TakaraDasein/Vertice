@@ -191,12 +191,12 @@ export default function PerfilOscarBermeo() {
             </div>
 
             <div>
-              <a href="/cv-oscar-bermeo.html" target="_blank" rel="noopener noreferrer">
-                <Button className="bg-[#C75C36] hover:bg-[#A84C2A] text-white">
-                  <FileText className="w-4 h-4 mr-2" />
-                  Descargar CV
-                </Button>
-              </a>
+              <a href="/downloads/CV%20Oscar%20Abel%20Bermeo%20Sotelo%20.pdf" download target="_blank" rel="noopener noreferrer">
+                  <Button className="bg-[#C75C36] hover:bg-[#A84C2A] text-white">
+                    <FileText className="w-4 h-4 mr-2" />
+                    Descargar CV
+                  </Button>
+                </a>
             </div>
           </div>
         </div>

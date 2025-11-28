@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Servicios Estilo "Explore"</title>
+    
+    <!-- 
+        VERSIÓN 3.0 - ESTILO "EXPLORE CANADA"
+        Novedades:
+        - Diseño fiel a la imagen de referencia.
+        - Todos los paneles inician del mismo tamaño.
+        - El contenido (título, subtítulo) es visible desde el inicio.
+        - El texto no se rota; en su lugar, se oculta el desbordamiento.
+        - La descripción aparece suavemente al expandir el panel.
+    -->
+
+    <style>
+        /* --- ESTILOS GLOBALES Y DE PREPARACIÓN --- */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* Usamos Poppins para el cuerpo y Playfair para los títulos, como en la inspiración */
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a2a2a;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        /* --- ESTILOS DEL COMPONENTE DE SERVICIOS --- */
+
+        .interactive-services-container {
+            display: flex;
+            width: 90vw;
+            max-width: 1200px;
+            height: 70vh;
+            border-radius: 15px; /* Bordes redondeados como en la inspiración */
+            overflow: hidden; /* Muy importante para los bordes redondeados en los hijos */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .service-panel {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            flex: 1; /* Todos los paneles empiezan con el mismo tamaño */
+            position: relative;
+            cursor: pointer;
+            overflow: hidden; /* CLAVE: Oculta el contenido que no cabe */
+            transition: flex 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+            color: white;
+        }
+
+        /* Capa de degradado para mejorar la legibilidad del texto */
+        .service-panel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
+        }
+
+        /* --- Personaliza las imágenes de fondo aquí --- */
+        .panel-1 { background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1000&q=80'); }
+        .panel-2 { background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1000&q=80'); }
+        .panel-3 { background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1000&q=80'); }
+        .panel-4 { background-image: url('https://images.unsplash.com/photo-1611270418597-a6c77f4b7271?w=1000&q=80'); }
+        .panel-5 { background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=80'); }
+
+        .service-panel.active {
+            flex: 5; /* El panel activo se expande */
+        }
+
+        .panel-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%; /* El contenido debe ocupar todo el ancho */
+            padding: 2.5rem;
+            z-index: 2; /* Para que esté sobre la capa de degradado */
+        }
+        
+        .panel-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Línea decorativa como en la inspiración */
+        .panel-meta::before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 2px;
+            background: #FFC300; /* Un color amarillo/dorado */
+            margin-bottom: 1rem;
+        }
+
+        .panel-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            line-height: 1.2;
+            white-space: nowrap; /* CLAVE: Evita que el título se divida en varias líneas */
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .panel-content p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            opacity: 0; /* Oculto por defecto */
+            transform: translateY(15px);
+            transition: opacity 0.4s ease-out 0.3s, transform 0.4s ease-out 0.3s;
+        }
+
+        /* Mostrar la descripción solo en el panel activo */
+        .service-panel.active .panel-content p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* --- ESTILOS PARA DISPOSITIVOS MÓVILES (Responsividad) --- */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .interactive-services-container {
+                flex-direction: column;
+                width: 100%;
+                height: 100%; /* Usa la altura completa para que se pueda hacer scroll */
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .service-panel {
+                flex: 1;
+                min-height: 150px; /* Altura mínima para los paneles colapsados */
+                transition: min-height 0.5s ease-in-out;
+            }
+            .service-panel.active {
+                flex: 1; /* Flex no se usa para expandir, sino min-height */
+                min-height: 350px; /* El activo es más alto */
+            }
+            .panel-content h3 {
+                white-space: normal; /* Permitir que el texto se ajuste en móvil */
+                font-size: 1.8rem;
+            }
+            .panel-content p {
+                /* La descripción siempre está oculta a menos que el panel esté activo */
+                display: none;
+            }
+            .service-panel.active .panel-content p {
+                display: block; /* La mostramos */
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="interactive-services-container">
+
+        <!-- Panel 1: Gestión de Proyectos -->
+        <div class="service-panel panel-1 active"> <!-- Iniciaremos con el primero activo -->
+            <div class="panel-content">
+                <div class="panel-meta">Servicio 01</div>
+                <h3>Gestión de Proyectos</h3>
+                <p>Transformamos ideas en resultados tangibles a través de una metodología ágil y enfocada en el impacto.</p>
+            </div>
+        </div>
+
+        <!-- Panel 2: Consultoría y Estrategia Sostenible -->
+        <div class="service-panel panel-2">
+            <div class="panel-content">
+                <div class="panel-meta">Servicio 02</div>
+                <h3>Estrategia Sostenible</h3>
+                <p>Diseñamos estrategias que conectan sostenibilidad, innovación y resultados reales para tu negocio.</p>
+            </div>
+        </div>
+
+        <!-- Panel 3: Turismo de Naturaleza -->
+        <div class="service-panel panel-3">
+            <div class="panel-content">
+                <div class="panel-meta">Servicio 03</div>
+                <h3>Turismo de Naturaleza</h3>
+                <p>Creamos experiencias turísticas únicas que conservan el patrimonio natural y cultural de forma responsable.</p>
+            </div>
+        </div>
+
+        <!-- Panel 4: Economía Circular -->
+        <div class="service-panel panel-4">
+            <div class="panel-content">
+                <div class="panel-meta">Servicio 04</div>
+                <h3>Economía Circular</h3>
+                <p>Implementamos modelos de negocio que eliminan residuos y regeneran sistemas naturales.</p>
+            </div>
+        </div>
+
+        <!-- Panel 5: Conoce nuestra oferta -->
+        <div class="service-panel panel-5">
+            <div class="panel-content">
+                <div class="panel-meta">Servicio 05</div>
+                <h3>Nuestra Oferta</h3>
+                <p>Descubre cómo podemos ayudarte a alcanzar tus metas. Contáctanos para una asesoría personalizada.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // --- CÓDIGO JAVASCRIPT PARA LA INTERACTIVIDAD ---
+        // Se mantiene igual, ya que solo gestiona la clase '.active'.
+
+        const panels = document.querySelectorAll('.service-panel');
+
+        panels.forEach(panel => {
+            // Cambiamos a 'mouseover' para una interacción más fluida como en muchos diseños de este tipo.
+            // Si prefieres que sea con clic, simplemente cambia 'mouseover' por 'click'.
+            panel.addEventListener('mouseover', () => {
+                removeActiveClasses();
+                panel.classList.add('active');
+            });
+        });
+
+        function removeActiveClasses() {
+            panels.forEach(panel => {
+                panel.classList.remove('active');
+            });
+        }
+    </script>
+
+</body>
+</html>

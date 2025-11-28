@@ -114,7 +114,7 @@ export default function PackagesPage() {
               <Button asChild>
                 <a href="#contact" className="w-full">Pedir cotización</a>
               </Button>
-              <a href="/downloads/paquetes-servicios.txt" className="text-sm text-slate-600 hover:underline">Descargar folleto (PDF)</a>
+              <a href="/downloads/CV%20Oscar%20Abel%20Bermeo%20Sotelo%20.pdf" download target="_blank" rel="noopener noreferrer" className="text-sm text-slate-600 hover:underline">Descargar CV (PDF)</a>
             </div>
           </aside>
         </section>
