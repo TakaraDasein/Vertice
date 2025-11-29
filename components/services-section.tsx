@@ -26,7 +26,7 @@ const services: ServiceArea[] = [
     description: "Fortalecemos la sostenibilidad empresarial desde la planificación hasta la acción.",
     color: "#E6B280",
     icon: Lightbulb,
-    image: "/fotos/1.jpg",
+    image: "/nuestros_servicios/1.consultoria.webp",
     items: [
       "Planes y estrategias de sostenibilidad",
       "Orientación en certificaciones (ISO 14001)",
@@ -39,7 +39,7 @@ const services: ServiceArea[] = [
     description: "Transformamos ideas en resultados para organizaciones y gobiernos.",
     color: "#6B9BD5",
     icon: Globe,
-    image: "/fotos/5.jpg",
+    image: "/nuestros_servicios/3.gestion-conocimiento.webp",
     items: ["Diseño y ejecución de proyectos", "Asistencia técnica institucional", "Monitoreo y evaluación"],
   },
   {
@@ -48,7 +48,7 @@ const services: ServiceArea[] = [
     description: "Convertimos residuos en oportunidades sostenibles.",
     color: "#5A8F69",
     icon: Recycle,
-    image: "/fotos/9.jpg",
+    image: "/nuestros_servicios/2.gobernanza.webp",
     items: ["Estrategias de economía circular", "Transformación de materiales", "Educación ambiental"],
   },
   {
@@ -57,7 +57,7 @@ const services: ServiceArea[] = [
     description: "Modelos de turismo sostenible que conservan y fortalecen.",
     color: "#C8A049",
     icon: Sprout,
-    image: "/fotos/12.jpg",
+    image: "/nuestros_servicios/4.participativos.webp",
     items: ["Ecoturismo comunitario", "Asesoría a operadores", "Cadenas de valor locales"],
   },
 ];

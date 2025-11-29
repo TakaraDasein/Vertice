@@ -13,7 +13,7 @@ import Image from "next/image"
 import QueEsVerticeSection from "@/components/que-es-vertice-section"
 import NosotrosSection from "@/components/nosotros-section"
 import BlurText from "@/components/blur-text"
-import ServicesSection from "@/components/services-section"
+import ExpandableServicesPanel from "@/flow/expandable-services-panel"
 import HeroParticles from "@/components/hero-particles"
 import InteractiveModel from "@/components/interactive-model"
 
@@ -116,10 +116,10 @@ export default function VerticeHome() {
           </div>
         </section>
 
-        {/* Services Section */}
+        {/* Services Section (Expandable) */}
         <section id="section-4" className="zoom-section pt-16 md:pt-20">
           <div className="zoom-content">
-            <ServicesSection />
+            <ExpandableServicesPanel />
           </div>
         </section>
 
