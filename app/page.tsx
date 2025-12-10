@@ -16,6 +16,7 @@ import BlurText from "@/components/blur-text"
 import ExpandableServicesPanel from "@/flow/expandable-services-panel"
 import HeroParticles from "@/components/hero-particles"
 import InteractiveModel from "@/components/interactive-model"
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 
 export default function VerticeHome() {
   const [isLoaded, setIsLoaded] = useState(false)

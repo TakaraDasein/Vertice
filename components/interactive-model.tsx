@@ -3,11 +3,13 @@
 import React, { useState, useEffect, useRef } from "react"
 import TriangleButton from "@/components/triangle-button"
 import { MapPin, Layers, BarChart } from "lucide-react"
+import { useAutoplay } from "@/hooks/use-autoplay"
 
-export default function InteractiveModel() {
+function InteractiveModel() {
   const [activePiece, setActivePiece] = useState<number | null>(null)
   const [hoveredIcon, setHoveredIcon] = useState<number | null>(null)
   const [pressedIcon, setPressedIcon] = useState<number | null>(null)
+  const [isVisible, setIsVisible] = useState(true)
 
   const labels = [
     {
@@ -29,49 +31,37 @@ export default function InteractiveModel() {
 
   const colors = ['#6BBF9A', '#4E8C76', '#A4D7C4']
 
-  // Autoplay: cycle null -> 0 -> 1 -> 2 -> null ... every 4 seconds
+  // Usar hook de autoplay para manejar el ciclo automático
+  const { activeIndex, goToIndex, pause, resume } = useAutoplay({
+    interval: 4000,
+    itemCount: 4, // null, 0, 1, 2
+    pauseOnInteraction: true,
+    pauseDuration: 10000
+  })
+
+  // Sincronizar activePiece con el autoplay
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (isPausedRef.current) return
-      setActivePiece((prev) => {
-        if (prev === null) return 0
-        if (prev < 2) return (prev as number) + 1
-        return null
-      })
-    }, 4000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  // Visibility toggle for quick subtle appear animation on content change
-  const [isVisible, setIsVisible] = useState(true)
-  // Pause control for autoplay when user manually selects a section
-  const isPausedRef = useRef(false)
-  const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  // Clear pause timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current)
+    // Convertir activeIndex (0-3) a activePiece (null, 0, 1, 2)
+    if (activeIndex === 0) {
+      setActivePiece(null)
+    } else {
+      setActivePiece(activeIndex - 1)
     }
-  }, [])
+  }, [activeIndex])
+
+  // Animación de visibilidad al cambiar
   useEffect(() => {
-    // hide then show to trigger CSS transition
     setIsVisible(false)
     const t = setTimeout(() => setIsVisible(true), 60)
     return () => clearTimeout(t)
   }, [activePiece])
 
-  // When user manually selects an index, keep it for 10s then resume autoplay
+  // Manejar selección manual del usuario
   const handleUserSelect = (index: number | null) => {
     setActivePiece(index)
-    if (index === null) return
-    // pause autoplay
-    isPausedRef.current = true
-    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current)
-    pauseTimeoutRef.current = setTimeout(() => {
-      isPausedRef.current = false
-    }, 10000)
+    // Convertir a índice de autoplay y pausar
+    const autoplayIndex = index === null ? 0 : index + 1
+    goToIndex(autoplayIndex)
   }
 
   return (
@@ -217,3 +207,5 @@ export default function InteractiveModel() {
     </div>
   )
 }
+
+export default React.memo(InteractiveModel)

@@ -7,8 +7,9 @@ import BlurText from "@/components/blur-text"
 import HeroParticles from "@/components/hero-particles"
 import { Sparkles, History } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import React from 'react'
 
-export default function QueEsVerticeSection() {
+function QueEsVerticeSection() {
   const [activeTab, setActiveTab] = useState<'vertice' | 'historia'>('vertice')
 
   const verticeInfo = {
@@ -251,3 +252,5 @@ export default function QueEsVerticeSection() {
     </section>
   )
 }
+
+export default React.memo(QueEsVerticeSection)

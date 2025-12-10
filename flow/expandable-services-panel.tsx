@@ -1,11 +1,13 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import React from 'react'
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ChevronRight, X } from "lucide-react"
 import HeroParticles from "@/components/hero-particles"
+import { useResponsive } from "@/hooks/use-responsive"
 
 interface ServicePanel {
   id: number
@@ -85,25 +87,20 @@ const services: ServicePanel[] = [
   },
 ]
 
-export default function ExpandableServicesPanel() {
+function ExpandableServicesPanel() {
   const [expandedId, setExpandedId] = useState<number | null>(null)
   const [hoveredId, setHoveredId] = useState<number | null>(null)
   const expandedRef = useRef<HTMLDivElement | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
   const router = useRouter()
+  
+  // Usar hook responsive
+  const { isMobile } = useResponsive()
 
   // Shared animation timing so menu and panel feel coherent
   const ANIM = {
     duration: 700,
     easing: "cubic-bezier(0.22, 1, 0.36, 1)",
   }
-
-  useEffect(() => {
-    const check = () => setIsMobile(typeof window !== 'undefined' ? window.innerWidth < 768 : false)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
 
   const getWidth = (serviceId: number) => {
     if (expandedId === null) {
@@ -422,6 +419,8 @@ export default function ExpandableServicesPanel() {
     </section>
   )
 }
+
+export default React.memo(ExpandableServicesPanel)
 
 // Keyboard navigation helpers (prev/next)
 function getIndexById(id: number | null) {

@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button"
 import HeroParticles from "@/components/hero-particles"
 import { FileText, ChevronRight, Award, Linkedin } from "lucide-react"
 import { motion } from "framer-motion"
+import React from 'react'
 
-export default function NosotrosSection() {
+function NosotrosSection() {
 
   const oscarProfile = {
     name: "Oscar Bermeo",
@@ -240,3 +241,5 @@ Fundó VÉRTICE como un laboratorio de soluciones que integra estrategia, sosten
     </section>
   )
 }
+
+export default React.memo(NosotrosSection)

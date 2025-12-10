@@ -8,6 +8,9 @@ import HeroParticles from "@/components/hero-particles"
 import { motion, AnimatePresence } from "framer-motion"
 import { Users, Leaf, TrendingUp, Play, Pause } from 'lucide-react'
 import React from 'react'
+import { useResponsive } from "@/hooks/use-responsive"
+import { useAutoplay } from "@/hooks/use-autoplay"
+import { fadeVariants, slideUpVariants, scaleVariants } from "@/lib/animations"
 
 // Small local icon component: network of 3 connected nodes
 const Network3 = ({ size = 20, color = '#ffffff', strokeWidth = 1.6 }: { size?: number; color?: string; strokeWidth?: number }) => (
@@ -74,37 +77,23 @@ const impactAreas: ImpactArea[] = [
   },
 ]
 
-export default function TripleImpactSection() {
-  // activeIndex references the position inside the cycle: [center, ...impactAreas]
-  const [activeIndex, setActiveIndex] = useState(0)
+function TripleImpactSection() {
   const [rotation, setRotation] = useState(0)
   const [isMounted, setIsMounted] = useState(false)
-  const [screenSize, setScreenSize] = useState({ width: 1024, height: 768 })
-  const [isPaused, setIsPaused] = useState(false)
+  
+  // Usar hooks personalizados
+  const { screenSize } = useResponsive()
+  const cycleLength = 1 + impactAreas.length
+  const { activeIndex, isPaused, togglePause, goToIndex } = useAutoplay({
+    interval: 5000,
+    itemCount: cycleLength,
+    pauseOnInteraction: true,
+    pauseDuration: 10000
+  })
 
   useEffect(() => {
     setIsMounted(true)
-    setScreenSize({ width: window.innerWidth, height: window.innerHeight })
-
-    const handleResize = () => {
-      setScreenSize({ width: window.innerWidth, height: window.innerHeight })
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
   }, [])
-
-  useEffect(() => {
-    // Auto-rotate through cycle (center + impactAreas) every 5 seconds unless paused
-    const cycleLength = 1 + impactAreas.length
-    if (isPaused) return
-
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % cycleLength)
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [isPaused])
 
   useEffect(() => {
     // Continuous smooth orbit rotation using requestAnimationFrame
@@ -368,3 +357,5 @@ export default function TripleImpactSection() {
     </section>
   )
 }
+
+export default React.memo(TripleImpactSection)

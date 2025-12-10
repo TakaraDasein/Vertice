@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
+import { useResponsive } from "@/hooks/use-responsive"
 
 interface Particle {
   x: number
@@ -19,6 +20,19 @@ export default function ParticleBackground() {
   const animationRef = useRef<number>()
   const mouseRef = useRef({ x: 0, y: 0 })
   const scrollRef = useRef(0)
+  const [isVisible, setIsVisible] = useState(true)
+  const lastFrameTime = useRef(0)
+  const { isMobile } = useResponsive()
+
+  // Detectar visibilidad del documento para pausar animación
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsVisible(!document.hidden)
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -27,11 +41,12 @@ export default function ParticleBackground() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    // Configuration
-    const isMobile = window.innerWidth < 768
-    const particleCount = isMobile ? 40 : 80
-    const maxDistance = isMobile ? 100 : 150
-    const mouseInfluence = isMobile ? 60 : 100
+    // Configuration optimizada
+    const particleCount = isMobile ? 30 : 60 // Reducido para mejor performance
+    const maxDistance = isMobile ? 80 : 120 // Reducido para menos cálculos
+    const mouseInfluence = isMobile ? 50 : 80
+    const targetFPS = 60
+    const frameInterval = 1000 / targetFPS
 
     // Color palette based on VÉRTICE theme
     const colors = [
@@ -176,8 +191,23 @@ export default function ParticleBackground() {
       }
     }
 
-    // Animation loop
-    const animate = () => {
+    // Animation loop con throttling para mejor performance
+    const animate = (currentTime: number) => {
+      // Pausar si la página no está visible
+      if (!isVisible) {
+        animationRef.current = requestAnimationFrame(animate)
+        return
+      }
+
+      // Throttling: limitar a target FPS
+      const elapsed = currentTime - lastFrameTime.current
+      if (elapsed < frameInterval) {
+        animationRef.current = requestAnimationFrame(animate)
+        return
+      }
+
+      lastFrameTime.current = currentTime - (elapsed % frameInterval)
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       const particles = particlesRef.current
@@ -186,8 +216,10 @@ export default function ParticleBackground() {
       // Update particles
       particles.forEach((particle, index) => updateParticle(particle, index))
 
-      // Find connections
-      findConnections()
+      // Find connections (optimizado: solo calcular cuando hay pocos particles)
+      if (particles.length < 100) {
+        findConnections()
+      }
 
       // Section-specific effects
       if (currentSection === 0) {
@@ -223,14 +255,23 @@ export default function ParticleBackground() {
     // Initialize
     resizeCanvas()
     initParticles()
-    animate()
+    
+    // Iniciar con timestamp
+    lastFrameTime.current = performance.now()
+    animationRef.current = requestAnimationFrame(animate)
 
-    // Event listeners
-    window.addEventListener("resize", () => {
-      resizeCanvas()
-      initParticles()
-    })
-    window.addEventListener("mousemove", handleMouseMove)
+    // Event listeners con debounce para resize
+    let resizeTimeout: ReturnType<typeof setTimeout>
+    const handleResize = () => {
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(() => {
+        resizeCanvas()
+        initParticles()
+      }, 250) // Debounce de 250ms
+    }
+
+    window.addEventListener("resize", handleResize)
+    window.addEventListener("mousemove", handleMouseMove, { passive: true })
     window.addEventListener("scroll", handleScroll, { passive: true })
 
     // Cleanup
@@ -238,11 +279,12 @@ export default function ParticleBackground() {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
-      window.removeEventListener("resize", resizeCanvas)
+      clearTimeout(resizeTimeout)
+      window.removeEventListener("resize", handleResize)
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("scroll", handleScroll)
     }
-  }, [])
+  }, [isMobile, isVisible])
 
   return (
     <>

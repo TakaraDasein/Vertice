@@ -18,7 +18,33 @@ export default function PerfilOscarBermeo() {
       phone: "+57 300 123 4567",
       linkedin: "linkedin.com/in/oscarbermeo"
     },
-    summary: "Profesional con más de 15 años de experiencia en cooperación internacional, sostenibilidad, desarrollo económico territorial y desarrollo rural. Especialista en diseño e implementación de proyectos de triple impacto que generan transformación social, ambiental y económica en territorios de Colombia y América Latina.",
+    summary: (
+      <>
+        <p className="mb-4">Politólogo | Especialista en Gerencia Social | Magíster en Sostenibilidad</p>
+
+        <p className="mb-4">Cuento con más de quince años de experiencia liderando proyectos sociales y ambientales en contextos de alta complejidad política, territorial y social. He trabajado con el Sistema de Naciones Unidas, ONG internacionales y entidades del Estado, coordinando procesos de fortalecimiento institucional, adaptación al cambio climático, derechos humanos y construcción de paz.</p>
+
+        <p className="mb-4">Actualmente, dirijo VÉRTICE | Laboratorio de soluciones, y oriento mi trayectoria hacia la gobernanza multiactor, la sostenibilidad ambiental y la adaptación al cambio climático, integrando enfoques sociales, diferenciales y de derechos humanos en proyectos territoriales.</p>
+
+        <ul className="list-disc pl-5 mb-4 text-[#4F4F4F]">
+          <li>Experto en gestión del ciclo de proyectos (planificación, ejecución, monitoreo y evaluación) bajo metodologías de marco lógico y estándares PMI.</li>
+          <li>Experiencia comprobada en la coordinación de equipos multidisciplinarios y multiculturales.</li>
+          <li>Fortalezas en articulación interinstitucional, negociación y desarrollo de alianzas estratégicas.</li>
+          <li>Capacidad de integrar dimensiones sociales, institucionales y ambientales para generar soluciones sostenibles e inclusivas.</li>
+        </ul>
+
+        <h3 className="font-semibold text-[#1C3D32] mb-2">Experiencia Destacada</h3>
+        <ul className="list-none pl-0 space-y-2 text-[#4F4F4F]">
+          <li>🔹 PNUD Colombia – Proyecto de Adaptación al Cambio Climático en La Mojana (Córdoba) / Coordinador del equipo social del Min Ambiente.</li>
+          <li>🔹 PNUD Colombia – Coordinador Territorial Suroccidente (Cauca, Nariño y Putumayo).</li>
+          <li>🔹 Opción Legal / ACNUR – Coordinador Nacional de Fortalecimiento Institucional.</li>
+          <li>🔹 OCHA – Oficina de Coordinación de Asuntos Humanitarios de Naciones Unidas – Coordinador Departamental Cauca.</li>
+          <li>🔹 Corporación Autónoma Regional del Cauca (CRC) – Consultor de Cooperación Internacional y sostenibilidad ambiental.</li>
+        </ul>
+
+        <p className="mt-4">Mi propósito es construir puentes entre instituciones, comunidades y cooperación internacional para impulsar proyectos transformadores que fortalezcan la resiliencia social y ambiental de los territorios.</p>
+      </>
+    ),
     expertise: [
       {
         icon: Globe,
@@ -211,9 +237,9 @@ export default function PerfilOscarBermeo() {
               <h2 className="text-2xl md:text-3xl font-bold text-[#1C3D32] mb-4">
                 Perfil Profesional
               </h2>
-              <p className="text-[#4F4F4F] text-base md:text-lg leading-relaxed">
+              <div className="text-[#4F4F4F] text-base md:text-lg leading-relaxed">
                 {profile.summary}
-              </p>
+              </div>
             </CardContent>
           </Card>
 
