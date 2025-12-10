@@ -95,21 +95,21 @@ export default function VerticeHome() {
         </section>
 
         {/* ¿Qué es Vértice? Section */}
-        <section id="section-1" className="zoom-section pt-16 md:pt-20">
+        <section id="section-1" className="zoom-section md:pt-20">
           <div className="zoom-content">
             <QueEsVerticeSection />
           </div>
         </section>
 
         {/* Nosotros Section */}
-        <section id="section-2" className="zoom-section pt-16 md:pt-20">
+        <section id="section-2" className="zoom-section md:pt-20">
           <div className="zoom-content">
             <NosotrosSection />
           </div>
         </section>
 
         {/* Triple Impact Section */}
-        <section id="section-3" className="zoom-section pt-16 md:pt-20">
+        <section id="section-3" className="zoom-section md:pt-20">
           <div className="zoom-content">
             <div className="h-full">
               <TripleImpactSection />
@@ -118,7 +118,7 @@ export default function VerticeHome() {
         </section>
 
         {/* Services Section (Expandable) */}
-        <section id="section-4" className="zoom-section pt-16 md:pt-20">
+        <section id="section-4" className="zoom-section md:pt-20">
           <div className="zoom-content">
             <ExpandableServicesPanel />
           </div>
@@ -153,7 +153,7 @@ export default function VerticeHome() {
         {/* Laboratorios Section removed */}
 
         {/* Footer Section with CTA */}
-        <section id="section-6" className="zoom-section pt-16 md:pt-20">
+        <section id="section-6" className="zoom-section md:pt-20">
           <div className="zoom-content">
             <div className="h-full">
               <Footer />

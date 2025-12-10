@@ -335,6 +335,12 @@ main.zoom-scroll-main {
     scroll-snap-type: none;
   }
 
+  body {
+    /* Sin espaciado para continuidad entre secciones */
+    margin: 0;
+    padding: 0;
+  }
+
   .zoom-section {
     /* Altura automática para permitir scroll natural */
     height: auto;
@@ -342,6 +348,8 @@ main.zoom-scroll-main {
     scroll-snap-align: none;
     scroll-snap-stop: normal;
     view-timeline: none;
+    /* Sin padding top para eliminar separación */
+    padding-top: 0 !important;
   }
 
   .zoom-content {

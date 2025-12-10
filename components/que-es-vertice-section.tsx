@@ -28,7 +28,7 @@ function QueEsVerticeSection() {
     subtitle: "Más de 15 años transformando territorios",
     content: [
       "VÉRTICE nace de la convergencia de más de **15 años de experiencia** en **cooperación internacional**, sostenibilidad y desarrollo territorial. Fundada con la visión de transformar la manera en que las organizaciones abordan los desafíos sociales y ambientales.",
-      "Desde sus inicios, VÉRTICE ha trabajado con comunidades, empresas y organizaciones internacionales, **co-creando soluciones** que generan **impacto real y medible** en territorios de toda Colombia y América Latina.",
+      "Desde sus inicios, VÉRTICE ha trabajado con comunidades, empresas y organizaciones internacionales, **co-creando soluciones** que generan **impacto real y medible** en territorios multiples territorios de Colombia.",
       "Hoy, VÉRTICE se consolida como un **laboratorio de innovación** social y ambiental, donde cada proyecto es una oportunidad para demostrar que el **desarrollo sostenible** no solo es posible, sino necesario y rentable."
     ]
   }
