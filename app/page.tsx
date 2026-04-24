@@ -134,7 +134,7 @@ export default function VerticeHome() {
               {/* Header */}
               <div className="text-center pt-3 md:pt-4 pb-2 md:pb-4 px-3 md:px-4 relative z-10 max-w-4xl mx-auto">
                 <h4 className="animate-in font-bold text-white mb-2 md:mb-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-tight leading-snug">
-                  Nuestro modelo de trabajo integra tres momentos clave que garantizan soluciones.
+                  <span className="font-bold" style={{ color: '#C75C36' }}>Nuestro modelo</span> de trabajo integra tres momentos clave que garantizan soluciones.
                 </h4>
               </div>
 

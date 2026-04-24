@@ -11,6 +11,7 @@ import BlurText from "@/components/blur-text"
 import HeroParticles from "@/components/hero-particles"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import InstagramVideoCarousel from "@/components/instagram-video-carousel"
 import { MapPin, Calendar, Users, Award, CheckCircle, Send, Clock } from "lucide-react"
 
 // Proyectos realizados en terreno
@@ -71,6 +72,15 @@ export default function VerticeTerritorio() {
   })
 
   const [submitted, setSubmitted] = useState(false)
+
+  // Videos de Instagram para el carrusel
+  const videos = [
+    { url: "https://www.instagram.com/reel/DRk2EcDkcRO/?igsh=MXhkNm9kczE0czBlbw==" },
+    { url: "https://www.instagram.com/reel/DRlEhCcEcei/?igsh=YWJ4ZXNzZzh6NmVr" },
+    { url: "https://www.instagram.com/reel/DR3GMaYkbIP/?igsh=b2J1bDg2MzE3M216" },
+    { url: "https://www.instagram.com/p/DWFelkukcPR/?igsh=NXJidDRva2sxZ2lj" },
+    { url: "https://www.instagram.com/reel/DXK4E_bEQpI/?igsh=Mjc5eTRqd2pnNGNh" }
+  ]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -133,6 +143,39 @@ export default function VerticeTerritorio() {
                 as="h2"
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6"
               />
+              
+              {/* Botones de acción */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <a
+                  href="https://forms.gle/dGcwVMSAgK2VxCcu6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[#C75C36] hover:bg-[#E06D45] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                >
+                  Inscríbete
+                </a>
+                <a
+                  href="/tdr-vertice-territorio.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all duration-300 border-2 border-white/30 hover:border-white/50 backdrop-blur-sm hover:scale-105"
+                >
+                  Términos de Referencia
+                </a>
+              </div>
+
+              {/* Banner de llamado a la acción */}
+              <div className="mb-8">
+                <div className="bg-[#476A47] rounded-lg p-4 shadow-lg relative overflow-hidden">
+                  {/* Puntas amarillas degradadas */}
+                  <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F5D76E] to-transparent"></div>
+                  <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F5D76E] to-transparent"></div>
+                  <p className="text-white text-lg md:text-xl font-semibold text-center relative z-10">
+                    ¿Tienes una iniciativa ambiental? Postula para recibir asesoría
+                  </p>
+                </div>
+              </div>
+              
               <div className="max-w-3xl mx-auto mb-8">
                 <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm">
                   <p className="text-lg md:text-xl text-primary-foreground font-semibold mb-4 text-center">Impulsamos iniciativas que transforman realidades desde lo local</p>
@@ -165,29 +208,16 @@ export default function VerticeTerritorio() {
               </h2>
               <div className="h-1 w-24 bg-gradient-to-r from-primary to-accent mx-auto mb-6 rounded-full"></div>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Próximamente
+                Historias reales de transformación territorial
               </p>
             </div>
 
-            <div className="max-w-3xl mx-auto">
-              <div className="bg-white/5 border border-white/10 rounded-lg p-8 flex flex-col items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Clock className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Sección en desarrollo</h3>
-                <p className="text-sm text-muted-foreground text-center">Aquí encontrarás casos reales de proyectos en terreno: estudios, resultados de impacto y material multimedia. Volveremos con contenido completo muy pronto.</p>
-              </div>
-            </div>
+            {/* Carrusel de videos de Instagram */}
+            <InstagramVideoCarousel videos={videos} />
           </div>
         </section>
 
-        <div className="h-24 bg-gradient-to-r from-primary via-accent to-primary flex items-center justify-center">
-          <p className="text-white text-lg md:text-xl font-semibold text-center px-4">
-            ¿Tienes una iniciativa ambiental? Postula para recibir asesoría
-          </p>
-        </div>
-
-        <section className="py-20 bg-background relative overflow-hidden">
+        <section className="py-20 bg-background relative overflow-hidden hidden">
           <div className="absolute top-10 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 left-10 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
           

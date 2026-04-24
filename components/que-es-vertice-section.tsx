@@ -16,7 +16,7 @@ function QueEsVerticeSection() {
     title: "¿Qué es VÉRTICE?",
     subtitle: "Laboratorio de Soluciones Sostenibles",
     description: [
-      "Somos una consultora especializada en sostenibilidad y **triple impacto** (social, ambiental y económico). Inspirada en los principios de las **empresas tipo B**.",
+      "Somos una empresa de innovación socioambiental y **triple impacto** (social, ambiental y económico). Inspirada en los principios de las **empresas tipo B**.",
       "Nuestro propósito es acompañar a empresas, organizaciones y comunidades en la construcción de **soluciones sostenibles**, medibles y transformadoras, conectando los tres ejes que hacen posible el cambio: las **personas**, los **ecosistemas** y las **economías locales**.",
       "VÉRTICE se diferencia porque no se limita a asesorar: **co-crea**.",
       "Actúa como un puente entre lo técnico, lo humano y lo ambiental. Diseña estrategias, articula actores y genera **modelos de negocio innovadores** que promueven prosperidad económica con responsabilidad social y equilibrio ecológico."
@@ -27,7 +27,7 @@ function QueEsVerticeSection() {
     title: "Nuestra Historia",
     subtitle: "Más de 15 años transformando territorios",
     content: [
-      "VÉRTICE nace de la convergencia de más de **15 años de experiencia** en **cooperación internacional**, sostenibilidad y desarrollo territorial. Fundada con la visión de transformar la manera en que las organizaciones abordan los desafíos sociales y ambientales.",
+      "VÉRTICE | Laboratorio de Soluciones, nació en el suroccidente de Colombia, una región diversa, resiliente y llena de talento. Aquí, donde a menudo se habla de conflicto, nosotros vemos potencial: comunidades que innovan, ecosistemas que resisten y personas que transforman su entorno día a día. VÉRTICE nace de la convergencia de más de **15 años de experiencia** en **cooperación internacional**, sostenibilidad y desarrollo territorial. Fundada con la visión de transformar la manera en que las organizaciones abordan los desafíos sociales y ambientales.",
       "Desde sus inicios, VÉRTICE ha trabajado con comunidades, empresas y organizaciones internacionales, **co-creando soluciones** que generan **impacto real y medible** en territorios multiples territorios de Colombia.",
       "Hoy, VÉRTICE se consolida como un **laboratorio de innovación** social y ambiental, donde cada proyecto es una oportunidad para demostrar que el **desarrollo sostenible** no solo es posible, sino necesario y rentable."
     ]

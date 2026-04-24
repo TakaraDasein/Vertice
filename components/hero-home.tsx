@@ -104,6 +104,9 @@ export default function HeroHome() {
             className="text-2xl sm:text-2xl md:text4xl lg:text-2xl font-bold drop-shadow-[0_0_30px_rgba(94,136,122,0.4)] tracking-wide"
             style={{ color: '#FFFFFF' }}
           />
+          <p className="text-sm sm:text-base md:text-lg font-medium mt-2" style={{ color: '#C75C36' }}>
+            Laboratorio de soluciones
+          </p>
         </div>
 
         {/* Description */}
