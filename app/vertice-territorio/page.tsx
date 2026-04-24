@@ -110,10 +110,44 @@ export default function VerticeTerritorio() {
     <>
       <Header />
       
-      <main className="min-h-screen bg-background">
+      {/* Capa de fondo unificada - Fixed, igual que la página principal */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        {/* Background principal */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1C3D32] via-[#152e26] to-[#0f221c]"></div>
         
-        <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-16 md:pt-20" style={{ backgroundColor: 'var(--primary)' }}>
-          <HeroParticles />
+        {/* Gradientes radiales */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(circle at 30% 20%, rgba(94, 136, 122, 0.15), transparent 40%), radial-gradient(circle at 70% 80%, rgba(71, 106, 71, 0.12), transparent 40%)'
+          }}
+        ></div>
+        
+        {/* Grid sutil */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: 'linear-gradient(#5E887A 1px, transparent 1px), linear-gradient(90deg, #5E887A 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        ></div>
+        
+        {/* Noise texture */}
+        <div
+          className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E")'
+          }}
+        ></div>
+        
+        {/* Partículas animadas */}
+        <HeroParticles />
+      </div>
+      
+      <main className="min-h-screen relative z-10">
+        
+        <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-16 md:pt-20">
+          {/* Nota: HeroParticles ya está en el fondo fijo, no duplicar aquí */}
 
           {/* Texture overlay to give the hero the new subtle pattern */}
           <div className="absolute inset-0 pointer-events-none -z-10" style={{
@@ -200,7 +234,7 @@ export default function VerticeTerritorio() {
           {/* bottom decorative bar removed as requested */}
         </section>
 
-        <section className="py-20 bg-background">
+        <section className="py-20 relative bg-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -219,7 +253,7 @@ export default function VerticeTerritorio() {
           </div>
         </section>
 
-        <section className="py-20 bg-background relative overflow-hidden hidden">
+        <section className="py-20 relative overflow-hidden hidden">
           <div className="absolute top-10 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 left-10 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
           

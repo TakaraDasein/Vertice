@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import BlurText from "@/components/blur-text"
-import HeroParticles from "@/components/hero-particles"
 import { motion, AnimatePresence } from "framer-motion"
 import { Users, Leaf, TrendingUp, Play, Pause } from 'lucide-react'
 import React from 'react'
@@ -121,30 +120,15 @@ function TripleImpactSection() {
   const CenterIcon = centerArea.icon
 
   const borderColor = 'white'
-  const particleOpacity = 0.6
 
   return (
-    <section className="panel min-h-screen flex items-center justify-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1C3D32, #0f221c)' }}>
-      {/* Textura poligonal triangular elegante */}
-      <div
-        className="absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="1"%3E%3Cpath d="M30 30L0 0v60l30-30zM30 30l30-30v60L30 30z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-          backgroundSize: '60px 60px'
-        }}
-      />
-
-      {/* Animated Logo Particles ajustadas para fondos coloreados */}
-      <div style={{ opacity: particleOpacity }}>
-        <HeroParticles />
-      </div>
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10 pt-16 md:pt-20" style={{ transform: 'scale(0.85)' }}>
+    <section className="panel min-h-screen flex items-start justify-center relative">
+      <div className="w-full min-h-full px-4 md:px-6 lg:px-8 relative z-10 flex items-start py-4">
         {/* Main Content */}
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-start">
+        <div className="w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 lg:gap-5 items-start">
             {/* Left Side - Content */}
-            <div className="space-y-4 md:space-y-6">
+            <div className="space-y-2 md:space-y-3">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentArea.id}
@@ -155,38 +139,38 @@ function TripleImpactSection() {
                   role="region"
                   aria-live="polite"
                 >
-                  <Card className="bg-white/95 backdrop-blur-sm border-[#D4CFC7] shadow-xl p-4 md:p-6 overflow-hidden relative">
+                  <Card className="bg-white/95 backdrop-blur-sm border-[#D4CFC7] shadow-xl p-2.5 md:p-3 overflow-hidden relative">
                     {/* Decorative top border */}
                     <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: currentArea.color }}></div>
 
-                    <CardContent className="pt-4">
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                    <CardContent className="pt-2.5">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 mb-2.5 md:mb-3">
                         <div
-                          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center border-2 transition-all duration-300 flex-shrink-0 shadow-lg"
+                          className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center border-2 transition-all duration-300 flex-shrink-0 shadow-lg"
                           style={{ backgroundColor: currentArea.color, borderColor }}
                         >
                           {CurrentIcon ? (
-                            <CurrentIcon size={18} color="#ffffff" strokeWidth={1.8} />
+                            <CurrentIcon size={16} color="#ffffff" strokeWidth={1.8} />
                           ) : (
                             <div className="w-full h-full bg-white/20" />
                           )}
                         </div>
                         <div>
-                          <h3 className="text-xl md:text-2xl font-bold text-black">
+                          <h3 className="text-base md:text-lg font-bold text-black">
                             {currentArea.id === 'center' ? `¿ ${currentArea.title} ?` : currentArea.title}
                           </h3>
-                          <p className="text-sm md:text-base font-medium text-gray-700">
+                          <p className="text-[10px] md:text-xs font-medium text-gray-700">
                             {currentArea.subtitle}
                           </p>
                         </div>
                       </div>
-                      <p className="text-[#4F4F4F] text-sm md:text-base leading-relaxed mb-6">
+                      <p className="text-[#4F4F4F] text-[10px] md:text-xs leading-relaxed mb-3">
                         {currentArea.description}
                       </p>
 
                       {/* Metrics Grid (render only if metrics exist) */}
                       {currentArea.metrics && currentArea.metrics.length > 0 && (
-                        <div className="grid grid-cols-3 gap-2 md:gap-4 pt-4 border-t border-gray-100">
+                        <div className="grid grid-cols-3 gap-1.5 md:gap-2 pt-3 border-t border-gray-100">
                           {currentArea.metrics.map((metric, idx) => (
                             <div key={idx} className="text-center">
                               <p className="text-lg md:text-xl font-bold" style={{ color: currentArea.color }}>{metric.value}</p>
@@ -201,11 +185,11 @@ function TripleImpactSection() {
               </AnimatePresence>
 
               {/* Progress Indicator */}
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center gap-1.5">
                 {cycle.map((area, index) => (
                   <div
                     key={area.id}
-                    className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 cursor-pointer ${index === activeIndex ? "scale-125" : "bg-[#1C3D32]/30"}`}
+                    className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 cursor-pointer ${index === activeIndex ? "scale-125" : "bg-[#1C3D32]/30"}`}
                     style={{ backgroundColor: index === activeIndex ? area.color : undefined }}
                     onClick={() => setActiveIndex(index)}
                     title={area.title}
@@ -214,7 +198,7 @@ function TripleImpactSection() {
               </div>
 
               {/* Navigation Buttons */}
-              <div className="flex justify-center gap-3 md:gap-4">
+              <div className="flex justify-center gap-2 md:gap-3">
                 <Button
                   onClick={() => setActiveIndex((prev) => (prev - 1 + cycle.length) % cycle.length)}
                   variant="outline"
@@ -248,8 +232,8 @@ function TripleImpactSection() {
             </div>
 
             {/* Right Side - Orbital Circles */}
-            <div className="flex items-center justify-center h-full min-h-[350px] md:min-h-[400px]">
-              <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px]">
+            <div className="flex items-center justify-center h-full min-h-[280px] md:min-h-[320px]">
+              <div className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] md:w-[280px] md:h-[280px]">
                 {/* Central Core - pequeño punto (no mostrar panel en el centro para evitar tapar los círculos) */}
                       {/* Central clickable core - muestra el centro al hacer click */}
                       <button

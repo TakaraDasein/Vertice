@@ -247,7 +247,10 @@ main.zoom-scroll-main {
 .zoom-content {
   /* Fijamos el contenido para que no scrollee con la sección */
   position: fixed;
-  inset: 0;
+  top: var(--header-height, 80px);
+  right: 0;
+  bottom: 0;
+  left: 0;
   overflow: hidden;
   
   /* Variables para controlar el efecto */
@@ -266,32 +269,16 @@ main.zoom-scroll-main {
 @keyframes zoom-scroll {
   /* Estado inicial: aparecer con zoom desde pequeño */
   0% {
-    filter: blur(0);
-    transform: scale(0.98);
+    filter: blur(var(--zoom-blur));
+    transform: scale(0);
     opacity: 0;
     visibility: hidden;
   }
   
-  /* Fade in rápido */
-  10% {
-    filter: blur(0);
-    transform: scale(0.99);
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  /* Estado activo: contenido completamente visible */
+  /* Estado activo: contenido visible al 70% del tamaño original */
   50% {
     filter: blur(0);
-    transform: scale(1);
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  /* Mantener visible hasta el final */
-  90% {
-    filter: blur(0);
-    transform: scale(1.01);
+    transform: scale(0.7);
     opacity: 1;
     visibility: visible;
   }
@@ -299,7 +286,7 @@ main.zoom-scroll-main {
   /* Estado de salida: zoom hacia afuera sin blur */
   100% {
     filter: blur(0);
-    transform: scale(1.02);
+    transform: scale(1.05);
     opacity: 0;
     visibility: hidden;
   }
@@ -495,50 +482,36 @@ body {
 /* Zoom scroll animation keyframes */
 @keyframes zoom-scroll {
   0% {
-    filter: blur(0);
-    transform: scale(0.98);
+    filter: blur(4rem);
+    transform: scale(0.21);
     opacity: 0;
     visibility: hidden;
   }
 
-  10% {
-    filter: blur(0);
-    transform: scale(0.985);
-    opacity: 1;
-    visibility: visible;
-  }
-
   25% {
-    filter: blur(0);
-    transform: scale(0.99);
-    opacity: 1;
+    filter: blur(1rem);
+    transform: scale(0.49);
+    opacity: 0.5;
     visibility: visible;
   }
 
   50% {
     filter: blur(0);
-    transform: scale(1);
+    transform: scale(0.7);
     opacity: 1;
     visibility: visible;
   }
 
   75% {
-    filter: blur(0);
-    transform: scale(1.01);
-    opacity: 1;
-    visibility: visible;
-  }
-
-  90% {
-    filter: blur(0);
-    transform: scale(1.015);
-    opacity: 1;
+    filter: blur(1rem);
+    transform: scale(0.805);
+    opacity: 0.5;
     visibility: visible;
   }
 
   100% {
-    filter: blur(0);
-    transform: scale(1.02);
+    filter: blur(4rem);
+    transform: scale(1.05);
     opacity: 0;
     visibility: hidden;
   }

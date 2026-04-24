@@ -57,43 +57,14 @@ export default function HeroHome() {
   ]
 
   return (
-    <section ref={containerRef} className="h-full flex items-center justify-center relative overflow-hidden pt-12 md:pt-16">
-      {/* Background Layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1C3D32] via-[#152e26] to-[#0f221c] pointer-events-none"></div>
-
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 30% 20%, rgba(94, 136, 122, 0.15), transparent 40%), radial-gradient(circle at 70% 80%, rgba(71, 106, 71, 0.12), transparent 40%)'
-        }}
-      ></div>
-
-      <div
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(#5E887A 1px, transparent 1px), linear-gradient(90deg, #5E887A 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
-        }}
-      ></div>
-
-      <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none mix-blend-overlay"
-        style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
-        }}
-      ></div>
-
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0f221c] via-transparent to-transparent pointer-events-none"></div>
-
-      <HeroParticles />
-
-      {/* Content - Scaled down 15% */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-8 py-8 w-full max-w-4xl mx-auto mt-12 md:mt-16" style={{ transform: 'scale(0.85)' }}>
+    <section ref={containerRef} className="min-h-screen flex items-start justify-center relative">
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-start min-h-full w-full px-4 sm:px-6 lg:px-8 py-4">
 
         {/* Logo & Title */}
-        <div className="text-center mb-6 md:mb-8 flex flex-col items-center">
+        <div className="text-center mb-4 md:mb-5 flex flex-col items-center">
           <Link href="/" className="block">
-            <AnimatedLogo className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 mb-2 sm:mb-3 transition-transform duration-300 hover:scale-110 cursor-pointer" />
+            <AnimatedLogo className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mb-2 transition-transform duration-300 hover:scale-110 cursor-pointer" />
           </Link>
           <BlurText
             text="VÉRTICE"
@@ -101,17 +72,17 @@ export default function HeroHome() {
             animateBy="letters"
             direction="top"
             as="h1"
-            className="text-2xl sm:text-2xl md:text4xl lg:text-2xl font-bold drop-shadow-[0_0_30px_rgba(94,136,122,0.4)] tracking-wide"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold drop-shadow-[0_0_30px_rgba(94,136,122,0.4)] tracking-wide"
             style={{ color: '#FFFFFF' }}
           />
-          <p className="text-sm sm:text-base md:text-lg font-medium mt-2" style={{ color: '#C75C36' }}>
+          <p className="text-xs sm:text-sm md:text-base font-medium mt-1.5" style={{ color: '#C75C36' }}>
             Laboratorio de soluciones
           </p>
         </div>
 
         {/* Description */}
-        <div ref={textRef} className="max-w-md mx-auto mb-8 md:mb-10 opacity-0">
-          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-center text-white leading-relaxed">
+        <div ref={textRef} className="max-w-md mx-auto mb-5 md:mb-6 opacity-0">
+          <p className="text-xs sm:text-sm md:text-base text-center text-white leading-relaxed">
             Conectamos <span className="font-bold text-[#A3C9BC]">propósito</span>, <span className="font-bold text-[#A3C9BC]">territorio</span> y <span className="font-bold text-[#A3C9BC]">acción</span> para construir un <span className="font-bold text-white">futuro sostenible</span> desde el triple impacto.
           </p>
         </div>
@@ -147,23 +118,23 @@ export default function HeroHome() {
           </div>
 
           {/* Social Links */}
-          <div ref={socialRef} className="flex gap-3 sm:gap-4 justify-center opacity-0">
+          <div ref={socialRef} className="flex gap-2.5 sm:gap-3 justify-center opacity-0">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/5 hover:bg-white/15 border border-white/10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-white/30 group"
+                className="w-9 h-9 bg-white/5 hover:bg-white/15 border border-white/10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-white/30 group"
                 title={social.label}
                 aria-label={social.label}
               >
                 <Image
                   src={social.icon}
                   alt={social.label}
-                  width={20}
-                  height={20}
-                  className="w-5 h-5 opacity-80 group-hover:opacity-100 transition-opacity"
+                  width={18}
+                  height={18}
+                  className="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity"
                 />
               </a>
             ))}

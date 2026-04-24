@@ -35,58 +35,33 @@ function QueEsVerticeSection() {
 
   return (
 
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Fondo degradado oscuro y textura verde diferente */}
-      <div className="absolute inset-0 z-0">
-        {/* Degradado igual al home */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C3D32] via-[#152e26] to-[#0f221c] pointer-events-none"></div>
-        {/* Nueva textura verde: líneas diagonales */}
-        <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(135deg, #5E887A 0 2px, transparent 2px 20px)',
-            backgroundSize: '40px 40px'
-          }}
-        />
-        {/* Sutil overlay para contraste */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0f221c]/40 pointer-events-none"></div>
-      </div>
-
-      {/* Elementos decorativos */}
-      <div className="absolute -top-20 -right-20 w-96 h-96 bg-[#1C3D32]/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute top-1/2 -left-20 w-72 h-72 bg-[#5E887A]/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      {/* Partículas sutiles */}
-      <div className="opacity-20">
-        <HeroParticles />
-      </div>
-
-      <div className="container mx-auto px-3 md:px-6 lg:px-8 relative z-10 py-4 md:py-12" style={{ transform: 'scale(0.85)' }}>
-        <div className="max-w-6xl mx-auto">
+    <section className="min-h-screen flex items-start justify-center relative py-4">
+      <div className="w-full min-h-full px-3 md:px-6 lg:px-8 relative z-10 flex items-start">
+        <div className="w-full">
 
           {/* Layout: Botones arriba en mobile, a la izquierda en desktop */}
-          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-4 lg:gap-6 lg:items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-3 md:gap-4 md:items-center">
 
             {/* Botones de Navegación - A la izquierda en desktop, arriba en mobile */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="order-1 flex flex-row lg:flex-col gap-2 md:gap-3 justify-center"
+              className="order-1 flex flex-row md:flex-col gap-2 md:gap-3 justify-center"
             >
               <Button
                 onClick={() => setActiveTab('vertice')}
                 className={`
                   group relative overflow-hidden px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-semibold
-                  rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex-1 lg:flex-none lg:w-40
+                  rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex-1 md:flex-none md:w-40
                   ${activeTab === 'vertice'
                     ? 'bg-gradient-to-r from-[#5E887A] to-[#1C3D32] text-white scale-105'
                     : 'bg-white/80 text-[#1C3D32] hover:bg-white border-2 border-[#5E887A]/20 hover:border-[#5E887A]/40'
                   }
                 `}
               >
-                <span className="relative z-10 flex items-center justify-center gap-1.5 md:gap-2">
-                  <Sparkles className={`w-3.5 h-3.5 md:w-4 md:h-4 transition-transform group-hover:rotate-12 ${activeTab === 'vertice' ? 'animate-pulse' : ''
+                <span className="relative z-10 flex items-center justify-center gap-1.5">
+                  <Sparkles className={`w-3 h-3 md:w-3.5 md:h-3.5 transition-transform group-hover:rotate-12 ${activeTab === 'vertice' ? 'animate-pulse' : ''
                     }`} />
                   <span className="hidden sm:inline">¿Qué es Vértice?</span>
                   <span className="sm:hidden">Vértice</span>
@@ -104,7 +79,7 @@ function QueEsVerticeSection() {
                 onClick={() => setActiveTab('historia')}
                 className={`
                   group relative overflow-hidden px-3 md:px-4 py-3 md:py-4 text-xs md:text-sm font-semibold
-                  rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex-1 lg:flex-none lg:w-40
+                  rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex-1 md:flex-none md:w-40
                   ${activeTab === 'historia'
                     ? 'bg-gradient-to-r from-[#1C3D32] to-[#285046] text-white scale-105'
                     : 'bg-white/80 text-[#1C3D32] hover:bg-white border-2 border-[#1C3D32]/20 hover:border-[#1C3D32]/40'

@@ -2,9 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import HeroParticles from "@/components/hero-particles"
 import { FileText, ChevronRight, Award, Linkedin } from "lucide-react"
 import { motion } from "framer-motion"
 import React from 'react'
@@ -28,73 +26,28 @@ Fundó VÉRTICE como un laboratorio de soluciones que integra estrategia, sosten
   }
 
   return (
-    <section className="relative bg-[#1C3D32]">
+    <section className="relative">
 
       {/* Background section starting after header */}
-      <div className="min-h-screen flex items-center justify-center relative overflow-hidden pt-8 md:pt-12">
-        {/* Textura diagonal */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `repeating-linear-gradient(
-              45deg,
-              transparent,
-              transparent 35px,
-              rgba(255, 255, 255, 0.03) 35px,
-              rgba(255, 255, 255, 0.03) 70px
-            )`
-            }}
-          />
-        </div>
+      <div className="min-h-screen flex items-start justify-center relative py-4">
 
-        {/* Textura de rejilla sutil */}
-        <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: 'linear-gradient(#5E887A 1px, transparent 1px), linear-gradient(90deg, #5E887A 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }}
-        ></div>
+        <div className="w-full min-h-full px-3 md:px-6 lg:px-8 relative z-10 flex items-start">
+          <div className="w-full">
 
-        {/* Textura de ruido */}
-        <div
-          className="absolute inset-0 opacity-[0.015] pointer-events-none mix-blend-overlay"
-          style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
-          }}
-        ></div>
-
-        {/* Textura radial elegante */}
-        <div
-          className="absolute inset-0 opacity-[0.05] pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle at 30% 20%, rgba(94, 136, 122, 0.1), transparent 40%), radial-gradient(circle at 70% 80%, rgba(71, 106, 71, 0.08), transparent 40%)'
-          }}
-        ></div>
-
-        {/* Partículas */}
-        <div className="opacity-40">
-          <HeroParticles />
-        </div>
-
-        <div className="container mx-auto px-3 md:px-6 relative z-10" style={{ transform: 'scale(0.85)' }}>
-          <div className="max-w-4xl mx-auto">
-
-            {/* Card del Perfil */}
+            {/* Profile Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              className="bg-white border-t border-b border-white shadow-2xl overflow-hidden hover:shadow-[0_0_60px_rgba(200,160,73,0.2)] transition-all duration-500 rounded-xl"
             >
-              <Card className="bg-white border-t border-b border-white shadow-2xl overflow-hidden hover:shadow-[0_0_60px_rgba(200,160,73,0.2)] transition-all duration-500">
-                <CardContent className="p-0">
+              <div className="p-0">
 
-                  <div className="flex flex-col lg:flex-row">
+                  <div className="flex flex-col md:flex-row">
 
-                    {/* Sección de Imagen */}
-                    <div className="lg:w-2/5 relative flex flex-col items-center justify-center bg-white text-[#4F4F4F] p-4 md:p-5 rounded-t-xl lg:rounded-l-xl">
-                      <div className="relative w-32 h-32 sm:w-36 sm:h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden mb-3 bg-gray-100">
+                    {/* Image Section */}
+                    <div className="md:w-2/5 relative flex flex-col items-center justify-center bg-white text-[#4F4F4F] p-3 md:p-4 rounded-t-xl md:rounded-l-xl md:rounded-tr-none">
+                      <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden mb-2 bg-gray-100">
                         <Image
                           src={oscarProfile.image}
                           alt={oscarProfile.name}
@@ -109,46 +62,46 @@ Fundó VÉRTICE como un laboratorio de soluciones que integra estrategia, sosten
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, delay: 0.3 }}
                         >
-                          <h3 className="text-base md:text-lg lg:text-xl font-bold mb-1 leading-tight text-[#1C3D32]">
+                          <h3 className="text-sm md:text-base lg:text-lg font-bold mb-1 leading-tight text-[#1C3D32]">
                             {oscarProfile.name}
                           </h3>
-                          <p className="text-[#C8A049] text-xs md:text-sm font-medium">
+                          <p className="text-[#C8A049] text-[9px] md:text-[10px] font-medium">
                             {oscarProfile.position}
                           </p>
-                          <div className="mt-2 w-8 md:w-10 h-0.5 bg-[#C8A049] rounded-full mx-auto"></div>
+                          <div className="mt-1 w-7 md:w-8 h-0.5 bg-[#C8A049] rounded-full mx-auto"></div>
                         </motion.div>
                       </div>
                     </div>
 
-                    {/* Sección de Contenido */}
-                    <div className="lg:w-3/5 p-3 md:p-4 lg:p-5 flex flex-col justify-between bg-white text-[#4F4F4F]">
+                    {/* Content Section */}
+                    <div className="md:w-3/5 p-2 md:p-3 lg:p-4 flex flex-col justify-between bg-white text-[#4F4F4F]">
 
                       <div>
-                        {/* Perfil Profesional - Más pequeño */}
+                        {/* Professional Profile - Smaller */}
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, delay: 0.4 }}
-                          className="mb-2 md:mb-2.5 bg-white text-[#4F4F4F] p-3 rounded-lg shadow-sm"
+                          className="mb-2 bg-white text-[#4F4F4F] p-2.5 rounded-lg shadow-sm"
                         >
-                          <h4 className="text-xs md:text-sm font-bold mb-1.5 flex items-center gap-2 text-[#1C3D32]">
-                            <span className="w-4 md:w-5 h-0.5 bg-[#CE5C36] rounded-full"></span>
+                          <h4 className="text-[9px] md:text-[10px] font-bold mb-1 flex items-center gap-2 text-[#1C3D32]">
+                            <span className="w-2.5 md:w-3 h-0.5 bg-[#CE5C36] rounded-full"></span>
                             Perfil Profesional
                           </h4>
-                          <p className="text-xs md:text-sm leading-relaxed">
+                          <p className="text-[10px] md:text-[11px] leading-relaxed text-[#4F4F4F]">
                             {oscarProfile.shortBio}
                           </p>
                         </motion.div>
 
-                        {/* Áreas de Expertise */}
+                        {/* Expertise Areas */}
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, delay: 0.5 }}
-                          className="mb-2 md:mb-3"
+                          className="mb-3 md:mb-4"
                         >
                           <h5 className="text-xs font-bold text-[#1C3D32] uppercase tracking-wider mb-2 flex items-center gap-2">
-                            <Award className="w-3 h-3" />
+                            <Award className="w-3 h-3 md:w-3.5 md:h-3.5" />
                             Áreas de Expertise
                           </h5>
                           <div className="flex flex-wrap gap-1.5">
@@ -158,7 +111,7 @@ Fundó VÉRTICE como un laboratorio de soluciones que integra estrategia, sosten
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.3, delay: 0.6 + index * 0.05 }}
-                                className="bg-[#F3F4F6] border border-gray-200 rounded-lg px-2 py-1 text-xs text-[#1C3D32] font-medium hover:bg-[#EDEDED] hover:border-gray-300 transition-all cursor-default shadow-sm hover:shadow-md"
+                                className="bg-[#F3F4F6] border border-gray-200 rounded-lg px-2 md:px-2.5 py-1 md:py-1.5 text-xs text-[#1C3D32] font-medium hover:bg-[#EDEDED] hover:border-gray-300 transition-all cursor-default shadow-sm hover:shadow-md"
                               >
                                 {area}
                               </motion.div>
@@ -172,11 +125,11 @@ Fundó VÉRTICE como un laboratorio de soluciones que integra estrategia, sosten
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.7 }}
-                        className="flex flex-col sm:flex-row gap-2 pt-2 md:pt-3"
+                        className="flex flex-col sm:flex-row gap-2 pt-3 md:pt-4"
                       >
                         <Link href="/perfil-oscar-bermeo" className="flex-1">
                           <Button
-                            className="w-full bg-gradient-to-r from-[#1C3D32] to-[#285046] text-white hover:from-[#285046] hover:to-[#1C3D32] transition-all shadow-lg hover:shadow-xl group py-2.5 md:py-3 lg:py-4 rounded-xl text-xs md:text-sm flex items-center gap-2"
+                            className="w-full bg-gradient-to-r from-[#1C3D32] to-[#285046] text-white hover:from-[#285046] hover:to-[#1C3D32] transition-all shadow-lg hover:shadow-xl group py-3 md:py-4 lg:py-5 rounded-xl text-xs md:text-sm flex items-center gap-3"
                           >
                             {/* Circular image inside button (left) */}
                             <span className="relative flex-shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-full overflow-hidden bg-gray-200">
@@ -231,8 +184,7 @@ Fundó VÉRTICE como un laboratorio de soluciones que integra estrategia, sosten
                     </div>
 
                   </div>
-                </CardContent>
-              </Card>
+              </div>
             </motion.div>
 
           </div>

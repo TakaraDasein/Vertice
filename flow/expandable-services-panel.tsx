@@ -6,7 +6,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ChevronRight, X } from "lucide-react"
-import HeroParticles from "@/components/hero-particles"
 import { useResponsive } from "@/hooks/use-responsive"
 
 interface ServicePanel {
@@ -282,21 +281,7 @@ function ExpandableServicesPanel() {
 
   return (
     <section className="w-full min-h-screen overflow-hidden relative">
-      {/* Background like QueEsVertice: gradient + subtle texture */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C3D32] via-[#152e26] to-[#0f221c] pointer-events-none" />
-        <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: 'repeating-linear-gradient(135deg, #5E887A 0 2px, transparent 2px 20px)', backgroundSize: '40px 40px' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0f221c]/40 pointer-events-none" />
-      </div>
-
-      <div className="absolute inset-0 z-[5] opacity-40 pointer-events-none">
-        <HeroParticles />
-      </div>
-
-      <div className="relative z-10" style={{ transform: 'scale(0.85)' }}>
+      <div className="relative z-10">
         {expandedId === null ? (
           <div className="w-full h-screen flex flex-col items-center justify-center px-4">
             <h4 className="text-4xl md:text-5xl font-bold mb-12 text-center z-20 text-white animate-in slide-in-from-bottom-24 duration-500">

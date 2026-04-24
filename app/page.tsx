@@ -85,7 +85,45 @@ export default function VerticeHome() {
   return (
     <>
       <Header />
-      <main ref={containerRef} className="zoom-scroll-main" style={{ scrollPaddingTop: '80px' }}>
+      
+      {/* Capa de fondo unificada - Fixed, fuera de todo el contenido */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        {/* Background principal */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1C3D32] via-[#152e26] to-[#0f221c]"></div>
+        
+        {/* Gradientes radiales */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(circle at 30% 20%, rgba(94, 136, 122, 0.15), transparent 40%), radial-gradient(circle at 70% 80%, rgba(71, 106, 71, 0.12), transparent 40%)'
+          }}
+        ></div>
+        
+        {/* Grid sutil */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: 'linear-gradient(#5E887A 1px, transparent 1px), linear-gradient(90deg, #5E887A 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        ></div>
+        
+        {/* Textura noise */}
+        <div
+          className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
+          }}
+        ></div>
+        
+        {/* Gradiente inferior */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f221c] via-transparent to-transparent"></div>
+        
+        {/* Partículas animadas */}
+        <HeroParticles />
+      </div>
+      
+      <main ref={containerRef} className="zoom-scroll-main relative z-10" style={{ scrollPaddingTop: '80px' }}>
 
         {/* Hero Section */}
         <section id="section-0" className="zoom-section">
@@ -95,21 +133,21 @@ export default function VerticeHome() {
         </section>
 
         {/* ¿Qué es Vértice? Section */}
-        <section id="section-1" className="zoom-section md:pt-20">
+        <section id="section-1" className="zoom-section">
           <div className="zoom-content">
             <QueEsVerticeSection />
           </div>
         </section>
 
         {/* Nosotros Section */}
-        <section id="section-2" className="zoom-section md:pt-20">
+        <section id="section-2" className="zoom-section">
           <div className="zoom-content">
             <NosotrosSection />
           </div>
         </section>
 
         {/* Triple Impact Section */}
-        <section id="section-3" className="zoom-section md:pt-20">
+        <section id="section-3" className="zoom-section">
           <div className="zoom-content">
             <div className="h-full">
               <TripleImpactSection />
@@ -118,7 +156,7 @@ export default function VerticeHome() {
         </section>
 
         {/* Services Section (Expandable) */}
-        <section id="section-4" className="zoom-section md:pt-20">
+        <section id="section-4" className="zoom-section">
           <div className="zoom-content">
             <ExpandableServicesPanel />
           </div>
@@ -127,10 +165,7 @@ export default function VerticeHome() {
         {/* Nuestro Modelo Section */}
         <section id="section-5" className="zoom-section">
           <div className="zoom-content">
-            <div className="min-h-screen bg-[#1C3D32] pt-20 relative overflow-hidden">
-              {/* Animated Logo Particles */}
-              <HeroParticles />
-
+            <div className="min-h-screen relative">
               {/* Header */}
               <div className="text-center pt-3 md:pt-4 pb-2 md:pb-4 px-3 md:px-4 relative z-10 max-w-4xl mx-auto">
                 <h4 className="animate-in font-bold text-white mb-2 md:mb-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-tight leading-snug">
@@ -153,7 +188,7 @@ export default function VerticeHome() {
         {/* Laboratorios Section removed */}
 
         {/* Footer Section with CTA */}
-        <section id="section-6" className="zoom-section md:pt-20">
+        <section id="section-6" className="zoom-section">
           <div className="zoom-content">
             <div className="h-full">
               <Footer />
