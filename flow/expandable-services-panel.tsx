@@ -296,7 +296,7 @@ function ExpandableServicesPanel() {
         <HeroParticles />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10" style={{ transform: 'scale(0.85)' }}>
         {expandedId === null ? (
           <div className="w-full h-screen flex flex-col items-center justify-center px-4">
             <h4 className="text-4xl md:text-5xl font-bold mb-12 text-center z-20 text-white animate-in slide-in-from-bottom-24 duration-500">

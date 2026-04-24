@@ -16,7 +16,11 @@ interface InstagramVideoCarouselProps {
 }
 
 export default function InstagramVideoCarousel({ videos }: InstagramVideoCarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true, 
+    align: "start",
+    containScroll: "trimSnaps"
+  })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
@@ -55,14 +59,14 @@ export default function InstagramVideoCarousel({ videos }: InstagramVideoCarouse
   }
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
+    <div className="relative w-full px-4 md:px-6">
       {/* Carrusel */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex gap-4 md:gap-6">
           {videos.map((video, index) => (
             <div
               key={index}
-              className="flex-[0_0_100%] sm:flex-[0_0_80%] md:flex-[0_0_60%] lg:flex-[0_0_45%] min-w-0"
+              className="flex-[0_0_76.5%] sm:flex-[0_0_58.5%] md:flex-[0_0_40.5%] lg:flex-[0_0_28.8%] xl:flex-[0_0_22.5%] min-w-0"
             >
               <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border-2 border-[#5E887A]/20">
                 {/* Contenedor del iframe de Instagram */}

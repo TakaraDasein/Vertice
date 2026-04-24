@@ -160,16 +160,16 @@ export default function VerticeTerritorio() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all duration-300 border-2 border-white/30 hover:border-white/50 backdrop-blur-sm hover:scale-105"
                 >
-                  Términos de Referencia
+                  Términos de la convocatoria
                 </a>
               </div>
 
               {/* Banner de llamado a la acción */}
               <div className="mb-8">
                 <div className="bg-[#476A47] rounded-lg p-4 shadow-lg relative overflow-hidden">
-                  {/* Puntas amarillas degradadas */}
-                  <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F5D76E] to-transparent"></div>
-                  <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F5D76E] to-transparent"></div>
+                  {/* Puntas verdes degradadas */}
+                  <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#5E887A] to-transparent"></div>
+                  <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#5E887A] to-transparent"></div>
                   <p className="text-white text-lg md:text-xl font-semibold text-center relative z-10">
                     ¿Tienes una iniciativa ambiental? Postula para recibir asesoría
                   </p>
@@ -211,8 +211,10 @@ export default function VerticeTerritorio() {
                 Historias reales de transformación territorial
               </p>
             </div>
+          </div>
 
-            {/* Carrusel de videos de Instagram */}
+          {/* Carrusel de videos de Instagram - ancho completo */}
+          <div className="w-full">
             <InstagramVideoCarousel videos={videos} />
           </div>
         </section>

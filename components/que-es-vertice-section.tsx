@@ -61,7 +61,7 @@ function QueEsVerticeSection() {
         <HeroParticles />
       </div>
 
-      <div className="container mx-auto px-3 md:px-6 lg:px-8 relative z-10 py-4 md:py-12">
+      <div className="container mx-auto px-3 md:px-6 lg:px-8 relative z-10 py-4 md:py-12" style={{ transform: 'scale(0.85)' }}>
         <div className="max-w-6xl mx-auto">
 
           {/* Layout: Botones arriba en mobile, a la izquierda en desktop */}

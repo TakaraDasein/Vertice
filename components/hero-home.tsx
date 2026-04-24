@@ -87,8 +87,8 @@ export default function HeroHome() {
 
       <HeroParticles />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-8 py-8 w-full max-w-4xl mx-auto mt-12 md:mt-16">
+      {/* Content - Scaled down 15% */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-8 py-8 w-full max-w-4xl mx-auto mt-12 md:mt-16" style={{ transform: 'scale(0.85)' }}>
 
         {/* Logo & Title */}
         <div className="text-center mb-6 md:mb-8 flex flex-col items-center">

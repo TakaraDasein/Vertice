@@ -45,7 +45,7 @@ export default function Footer() {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#1C3D32]/50 via-transparent to-[#1C3D32]/90 pointer-events-none"></div>
 
-        <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 lg:py-20 relative z-10">
+        <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 lg:py-20 relative z-10" style={{ transform: 'scale(0.85)' }}>
           {/* Two Column Layout - compact spacing */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-12 items-stretch">
             {/* Left Column - Text Content */}

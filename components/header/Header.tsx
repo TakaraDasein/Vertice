@@ -10,12 +10,13 @@ import HeaderMobileMenu from "./HeaderMobileMenu"
 import HeaderMenuButton from "./HeaderMenuButton"
 
 export default function Header() {
-  // Estado del menú
+  // Estado del menú - SIEMPRE inicia cerrado
   const [open, setOpen] = useState(false)
   const openRef = useRef(false)
   const [textLines, setTextLines] = useState(['Menu', 'Cerrar'])
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const pathname = usePathname()
+  const hasUserInteracted = useRef(false)
 
   // Referencias para animaciones
   const panelRef = useRef<HTMLDivElement>(null)
@@ -48,17 +49,34 @@ export default function Header() {
     toggleBtnRef
   })
 
-  // Forzar estado cerrado en el primer render
+  // Forzar estado cerrado siempre al montar
   useEffect(() => {
     setOpen(false)
     openRef.current = false
+    hasUserInteracted.current = false
   }, [])
+  
+  // Cerrar menú cuando cambia la ruta
+  useEffect(() => {
+    setOpen(false)
+    openRef.current = false
+  }, [pathname])
 
   // Asegurar que el panel esté oculto cuando está cerrado
   useEffect(() => {
     const panel = panelRef.current
     if (!panel) return
     
+    // Si el usuario nunca ha interactuado, mantener completamente oculto
+    if (!hasUserInteracted.current) {
+      panel.style.display = 'none'
+      panel.style.opacity = '0'
+      panel.style.pointerEvents = 'none'
+      panel.style.visibility = 'hidden'
+      return
+    }
+    
+    // Si ya interactuó, manejar normalmente
     if (!open) {
       panel.style.display = 'none'
       panel.style.opacity = '0'
@@ -72,8 +90,11 @@ export default function Header() {
     }
   }, [open])
 
-  // Toggle del menú
+  // Toggle del menú - solo permitir si el usuario interactuó
   const toggleMenu = useCallback(() => {
+    // Marcar que el usuario ha interactuado
+    hasUserInteracted.current = true
+    
     const target = !openRef.current
     openRef.current = target
     setOpen(target)
